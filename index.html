@@ -1092,7 +1092,8 @@ function execReportNode(v){
    <div class="ex-foot"><b>Brantech</b> — Engenharia de Segurança do Trabalho · Relatório gerado em ${fmtTS(new Date().toISOString())}<br>Documento técnico de assessoria em SST · uso interno e do cliente.</div>`;
   return rep;
 }
-function openExecReport(v){
+function openExecOverlay(v){
+  // fallback: abre por cima do app (caso a aba nova seja bloqueada)
   const wrap=el('div','exwrap');
   const tools=el('div','extools noprint');
   const bP=el('button','btn green sm','🖨️ Imprimir / salvar PDF'); bP.onclick=()=>window.print();
@@ -1100,6 +1101,25 @@ function openExecReport(v){
   tools.appendChild(bP); tools.appendChild(bC); wrap.appendChild(tools);
   wrap.appendChild(execReportNode(v));
   document.body.appendChild(wrap);
+}
+function openExecReport(v){
+  // abre o relatório numa ABA NOVA, como documento próprio de tema claro (robusto contra modo escuro)
+  let win=null;
+  try{ win=window.open('','_blank'); }catch(e){ win=null; }
+  if(!win){ openExecOverlay(v); return; }
+  const styleText=[...document.querySelectorAll('style')].map(s=>s.textContent).join('\n');
+  const fonts='<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">';
+  const rep=execReportNode(v);
+  const toolsHTML='<div class="extools noprint"><button class="btn green sm" onclick="window.print()">🖨️ Salvar como PDF</button><button class="btn ghost sm" onclick="window.close()">✕ Fechar</button></div>';
+  const html='<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8">'+
+    '<meta name="viewport" content="width=device-width, initial-scale=1">'+
+    '<meta name="color-scheme" content="light">'+
+    '<title>Relatório de Assessoria — NR-07 · '+esc(v.client.name)+'</title>'+
+    fonts+'<style>'+styleText+'\nhtml,body{background:#fff;background-image:linear-gradient(#fff,#fff)!important;margin:0}'+
+    '.extools{position:sticky;top:0;display:flex;gap:8px;padding:10px 12px;background:#0B3B34;background-image:linear-gradient(#0B3B34,#0B3B34)!important;z-index:5}'+
+    '.exrep{margin:0 auto}</style></head><body>'+
+    toolsHTML+rep.outerHTML+'</body></html>';
+  win.document.open(); win.document.write(html); win.document.close();
 }
 
 /* ---------- navegação por abas no rodapé (base app de auditoria) ---------- */
