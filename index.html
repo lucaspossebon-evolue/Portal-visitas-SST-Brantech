@@ -1264,15 +1264,50 @@ function buildNR07(tier){
     rank:i.rank, focus:false, acao:i.acao, prio:i.prioridade,
     risco:i.risco||'', passos:i.passos||null}));
 }
+const NR05DATA = {"itens": [{"id": "n0", "bloco": "Constituição", "prioridade": "Alta", "item": "Enquadramento (Quadro I)", "nr": "NR-05 (Quadro I — dimensionamento)", "verify": "A empresa possui enquadramento de CIPA conforme o Quadro I da NR-05?", "acao": "Verificar o CNAE e o número de empregados do estabelecimento no Quadro I da NR-05.", "rank": 1, "risco": "Dimensionamento incorreto deixa a CIPA irregular (ou ausente quando obrigatória) e sujeita a empresa a autuação do MTE.", "passos": ["Verificar o CNAE e o número de empregados do estabelecimento no Quadro I da NR-05", "Constituir e dimensionar a CIPA conforme o enquadramento, ou registrar a dispensa quando não aplicável"], "evidencia": "Quadro de dimensionamento e enquadramento no Quadro I."}, {"id": "n1", "bloco": "Constituição", "prioridade": "Alta", "item": "Representante nomeado", "nr": "NR-05 (item 5.4.13)", "verify": "Quando não se enquadra no Quadro I, a empresa nomeou um representante entre os empregados para auxiliar nas ações de prevenção?", "acao": "Formalizar a nomeação de um representante entre os empregados (item 5.4.13).", "rank": 1, "risco": "Sem representante nomeado, o estabelecimento fica sem agente de prevenção exigido pela norma — não conformidade à NR-05.", "passos": ["Formalizar a nomeação de um representante entre os empregados (item 5.4.13)", "Realizar o treinamento de capacitação do representante e manter o registro"], "evidencia": "Documento de nomeação e certificado de capacitação do representante."}, {"id": "n2", "bloco": "Documentação", "prioridade": "Média", "item": "Atas de eleição e posse", "nr": "NR-05 (item 5.4.8)", "verify": "A empresa forneceu cópias das atas de eleição e de posse aos membros titulares e suplentes da CIPA?", "acao": "Disponibilizar aos titulares e suplentes cópias das atas de eleição e de posse (item 5.4.8).", "rank": 1, "risco": "Falha em disponibilizar as atas fragiliza a comprovação da constituição regular da CIPA em fiscalização.", "passos": ["Disponibilizar aos titulares e suplentes cópias das atas de eleição e de posse (item 5.4.8)", "Manter evidência do recebimento (recibo assinado ou registro eletrônico)"], "evidencia": "Atas de eleição e posse e o comprovante de disponibilização."}, {"id": "n3", "bloco": "Reuniões", "prioridade": "Alta", "item": "Reuniões mensais e atas", "nr": "NR-05 (item 5.6.1)", "verify": "As reuniões mensais da CIPA estão sendo realizadas conforme o calendário anual, com atas elaboradas e assinadas?", "acao": "Realizar reuniões ordinárias mensais conforme calendário previamente estabelecido (item 5.6.1).", "rank": 1, "risco": "Reuniões ou atas ausentes descaracterizam o funcionamento da CIPA e ensejam autuação.", "passos": ["Realizar reuniões ordinárias mensais conforme calendário previamente estabelecido (item 5.6.1)", "Registrar cada reunião em ata assinada pelos presentes e disponibilizá-la a todos os integrantes (admite-se meio eletrônico)"], "evidencia": "Calendário anual e as atas mensais assinadas."}, {"id": "n4", "bloco": "Integração", "prioridade": "Média", "item": "Programas apresentados à CIPA", "nr": "NR-05 (participação da CIPA nos programas de SST)", "verify": "Os programas da empresa (PGR/PGRTR e PCMSO) foram apresentados à CIPA e registrados em ata?", "acao": "Apresentar à CIPA o PGR e o PCMSO, permitindo o acompanhamento e a participação da Comissão.", "rank": 1, "risco": "Sem a apresentação, a CIPA fica sem participar do desenvolvimento e da implementação das ações de SST.", "passos": ["Apresentar à CIPA o PGR e o PCMSO, permitindo o acompanhamento e a participação da Comissão", "Registrar a apresentação e os principais assuntos tratados em ata"], "evidencia": "Ata da CIPA em que consta a apresentação dos programas (fotografar a ata)."}, {"id": "n5", "bloco": "Assédio", "prioridade": "Alta", "item": "Canal de denúncia (assédio)", "nr": "NR-01 (item 1.4.1.1, “b”)", "verify": "A empresa possui procedimento/canal interno para denúncias de assédio sexual e outras formas de violência, garantindo o anonimato da pessoa denunciante?", "acao": "Instituir procedimento formal de recebimento, registro, acompanhamento e apuração das denúncias.", "rank": 1, "risco": "A ausência de canal formal descumpre a NR-01, expõe a empresa a responsabilização e a passivos, e desprotege as vítimas.", "passos": ["Instituir procedimento formal de recebimento, registro, acompanhamento e apuração das denúncias", "Definir as medidas e sanções administrativas cabíveis e garantir o anonimato da pessoa denunciante", "Manter registros das providências adotadas"], "evidencia": "Procedimento/política formal e evidência do canal de denúncia."}, {"id": "n6", "bloco": "Assédio", "prioridade": "Alta", "item": "Capacitação anual (assédio)", "nr": "NR-01 (item 1.4.1.1)", "verify": "A empresa aborda anualmente temas de prevenção e combate ao assédio sexual e a outras formas de violência no trabalho?", "acao": "Realizar, no mínimo a cada 12 meses, ações de capacitação, orientação e sensibilização com todos os níveis hierárquicos.", "rank": 1, "risco": "Sem capacitação periódica, a empresa descumpre a NR-01 e amplia o risco de ocorrências e de responsabilização.", "passos": ["Realizar, no mínimo a cada 12 meses, ações de capacitação, orientação e sensibilização com todos os níveis hierárquicos", "Abordar prevenção e combate à violência, ao assédio, à discriminação, à igualdade e à diversidade", "Manter os registros de realização (conteúdo, datas e presença)"], "evidencia": "Lista de presença e material das ações (fotografar a lista de presença)."}, {"id": "n7", "bloco": "Acidentes", "prioridade": "Alta", "item": "Análise de acidentes", "nr": "NR-05 (item 5.3.1, alínea “f”)", "verify": "A CIPA acompanha a análise dos acidentes e doenças do trabalho e propõe medidas para prevenir a recorrência?", "acao": "Garantir que a CIPA participe e acompanhe as investigações de acidentes e doenças do trabalho.", "rank": 1, "risco": "Sem o acompanhamento da CIPA, causas não são tratadas e os acidentes tendem a se repetir.", "passos": ["Garantir que a CIPA participe e acompanhe as investigações de acidentes e doenças do trabalho", "Avaliar as causas e propor medidas corretivas e preventivas para evitar novas ocorrências", "Manter os registros e evidências das ações"], "evidencia": "CAT e investigação dos acidentes; verificar a menção em ata da CIPA."}, {"id": "n8", "bloco": "Capacitação", "prioridade": "Alta", "item": "Treinamento antes da posse", "nr": "NR-05 (itens 5.7.1 e 5.7.2)", "verify": "A empresa realizou o treinamento do representante nomeado e dos membros titulares e suplentes da CIPA antes da posse?", "acao": "Garantir o treinamento do representante e dos membros titulares e suplentes, preferencialmente antes da posse.", "rank": 1, "risco": "Posse sem treinamento deixa a CIPA sem a capacitação exigida e sujeita a empresa a autuação.", "passos": ["Garantir o treinamento do representante e dos membros titulares e suplentes, preferencialmente antes da posse", "Atender ao conteúdo e à carga horária dos itens 5.7.1 e 5.7.2", "Manter certificados e registros de participação"], "evidencia": "Certificado, conteúdo programático, carga horária, lista de presença e datas do treinamento e da posse."}, {"id": "n9", "bloco": "Promoção", "prioridade": "Média", "item": "SIPAT anual", "nr": "NR-05 (promoção da SIPAT pela CIPA)", "verify": "A empresa realiza anualmente a SIPAT (Semana Interna de Prevenção de Acidentes)?", "acao": "Promover a SIPAT anualmente, em conjunto com o SESMT quando houver, conforme programação definida pela CIPA.", "rank": 1, "risco": "A não realização da SIPAT descumpre a NR-05 e perde uma das principais ações preventivas do ano.", "passos": ["Promover a SIPAT anualmente, em conjunto com o SESMT quando houver, conforme programação definida pela CIPA", "Contemplar temas de prevenção de acidentes, doenças ocupacionais, assédio e violência", "Manter registros das atividades realizadas"], "evidencia": "Programação, divulgação, lista de participação e registros/fotos das atividades."}]};
+function buildNR05(){
+  return NR05DATA.itens.map(i=>({
+    id:i.id, group:i.bloco, item:i.item, verify:i.verify, nr:i.nr,
+    rank:1, focus:false, acao:i.acao, prio:i.prioridade,
+    risco:i.risco||'', passos:i.passos||null, evidencia:i.evidencia||''}));
+}
+const TIPOS={
+ nr07:{menu:'Assessoria NR-07 · PCMSO', short:'Assessoria NR-07', foco:'Assessoria NR-07', icon:'🔎',
+   audit:true, docTitle:'Relatório de assessoria — NR-07 (PCMSO)', seal:'ASSESSORIA',
+   repTitle:'Assessoria em SST — Foco NR-07 (PCMSO)', repKick:'RELATÓRIO DE ASSESSORIA EM SST · CONFIDENCIAL',
+   repSub:'Visita de assessoria em Segurança e Saúde no Trabalho · Foco: PCMSO (NR-07) · Brantech Engenharia de Segurança do Trabalho',
+   repIntro:'com foco na NR-07 — Programa de Controle Médico de Saúde Ocupacional (PCMSO)',
+   repBase:'NR-07 (PCMSO), NR-01 (GRO/PGR e capacitação), NR-09 (avaliação de agentes), NR-15 (insalubridade), Decreto nº 3.048/99 e IN INSS/DIRBEN nº 128/2022 (LTCAT/PPP), Manual de Orientação do eSocial (eventos S-2220 e S-2240), CLT (arts. 168 e 169) e Resoluções do CFM aplicáveis à medicina do trabalho.',
+   repMethodTitle:'Metodologia da Visita de Assessoria', repMethod:'A assessoria seguiu três etapas: (i) verificação documental — existência, vigência e responsabilidade técnica dos documentos do PCMSO e dos exames ocupacionais (ASO); (ii) consistência com o PGR e o eSocial — alinhamento entre riscos mapeados, exames previstos e eventos transmitidos; e (iii) orientação técnica e plano de ação — classificação das não conformidades por prioridade (Alta, Média, Baixa), com recomendação estruturada para cada item.',
+   info:'Checklist de NR-07 (PCMSO) · 10 itens. A duração selecionada é registrada na visita.'},
+ nr05:{menu:'Auditoria NR-05 · CIPA', short:'Auditoria NR-05', foco:'Auditoria NR-05 · CIPA', icon:'📋',
+   audit:true, docTitle:'Relatório de auditoria — NR-05 (CIPA)', seal:'AUDITORIA',
+   repTitle:'Auditoria NR-05 — CIPA e Prevenção de Assédio', repKick:'RELATÓRIO DE AUDITORIA · CONFIDENCIAL',
+   repSub:'Auditoria da Comissão Interna de Prevenção de Acidentes e de Assédio (CIPA) · Brantech Engenharia de Segurança do Trabalho',
+   repIntro:'com foco na NR-05 — Comissão Interna de Prevenção de Acidentes e de Assédio (CIPA) e na prevenção do assédio e da violência no trabalho',
+   repBase:'NR-05 (CIPA e Prevenção de Assédio), NR-01 (item 1.4.1.1 — prevenção e combate ao assédio e à violência), Lei nº 14.457/2022 e demais normas correlatas de SST.',
+   repMethodTitle:'Metodologia da Auditoria', repMethod:'A auditoria seguiu três etapas: (i) verificação documental — atas de eleição, posse e reuniões, calendário anual, treinamentos, procedimentos e demais evidências exigidas pela NR-05; (ii) verificação das práticas — funcionamento da CIPA, ações de prevenção e combate ao assédio e à violência e o tratamento de acidentes e doenças do trabalho; e (iii) orientação técnica e plano de ação — classificação das não conformidades por prioridade (Alta, Média, Baixa), com recomendação e evidência para cada item.',
+   info:'Auditoria de NR-05 (CIPA e Prevenção de Assédio) · 10 itens.'},
+ assessoria:{short:'Assessoria', foco:'Assessoria mensal', icon:'📋', audit:false,
+   docTitle:'Relatório de visita — Assessoria SST', seal:'VISITA',
+   repTitle:'Relatório de Visita — Assessoria em SST', repKick:'RELATÓRIO DE VISITA · CONFIDENCIAL',
+   repSub:'Visita de assessoria mensal em Segurança e Saúde no Trabalho · Brantech Engenharia de Segurança do Trabalho',
+   repIntro:'no acompanhamento mensal de Segurança e Saúde no Trabalho, conforme o foco definido para a competência',
+   repBase:'NR-01 (GRO/PGR e capacitação), normas regulamentadoras aplicáveis ao segmento e demais normas de SST pertinentes.',
+   repMethodTitle:'Metodologia da Visita', repMethod:'A visita seguiu três etapas: (i) verificação documental e de campo dos requisitos aplicáveis; (ii) análise de consistência entre a documentação, os registros e a realidade operacional; e (iii) orientação técnica e plano de ação — classificação das não conformidades por prioridade (Alta, Média, Baixa), com recomendação estruturada para cada item.'}
+};
+function tipoInfo(t){ return TIPOS[t]||TIPOS.assessoria; }
+function isAuditType(t){ return t==='nr07'||t==='nr05'; }
 function openClient(cid){
   const c=clientById(cid);
-  const jaAss=visitFor(cid,todayKey(),'assessoria'), jaAud=visitFor(cid,todayKey(),'nr07');
+  const jaAss=visitFor(cid,todayKey(),'assessoria'), jaAud=visitFor(cid,todayKey(),'nr07'), jaAud5=visitFor(cid,todayKey(),'nr05');
   const bg=el('div','sheet-bg'); const sh=el('div','sheet startsheet');
   sh.innerHTML=`<h3>Iniciar <em>visita</em></h3><p class="hint">${esc(c.name)}</p>
     <div class="fld"><label>Tipo de visita</label>
       <select id="sv_tipo">
         <option value="assessoria">Assessoria mensal${jaAss?' (retomar)':''}</option>
         <option value="nr07">Assessoria NR-07 · PCMSO${jaAud?' (retomar)':''}</option>
+        <option value="nr05">Auditoria NR-05 · CIPA${jaAud5?' (retomar)':''}</option>
       </select></div>
     <div class="fld" id="sv_tempo_wrap" style="display:none">
       <label>Duração prevista da visita</label>
@@ -1291,38 +1326,38 @@ function openClient(cid){
   bg.onclick=e=>{ if(e.target===bg) bg.remove(); };
   const tipoSel=$('#sv_tipo',sh), tempoWrap=$('#sv_tempo_wrap',sh), tempoSel=$('#sv_tempo',sh), info=$('#sv_info',sh);
   const upd=()=>{
-    const aud=tipoSel.value==='nr07';
-    tempoWrap.style.display=aud?'block':'none';
-    if(aud){ const t=Number(tempoSel.value);
-      info.textContent='Checklist de NR-07 (PCMSO) · 10 itens. A duração selecionada é registrada na visita.';
-    } else {
-      info.textContent='Checklist mensal do segmento '+(c.segment||'—')+', ajustado ao tempo contratado ('+(c.hours||'—')+'h) e ao foco do mês.';
-    }
+    const t=tipoSel.value;
+    tempoWrap.style.display=(t==='nr07')?'block':'none';
+    if(t==='nr07') info.textContent=TIPOS.nr07.info;
+    else if(t==='nr05') info.textContent=TIPOS.nr05.info;
+    else info.textContent='Checklist mensal do segmento '+(c.segment||'—')+', ajustado ao tempo contratado ('+(c.hours||'—')+'h) e ao foco do mês.';
   };
   tipoSel.onchange=upd; tempoSel.onchange=upd; upd();
   $('#sv_x',sh).onclick=()=>bg.remove();
   $('#sv_ok',sh).onclick=()=>{
     const tipo=tipoSel.value; bg.remove();
     if(tipo==='nr07') openVisit(cid,'nr07',Number(tempoSel.value));
+    else if(tipo==='nr05') openVisit(cid,'nr05',null);
     else openVisit(cid,'assessoria',null);
   };
 }
 async function openVisit(cid,tipo,tier){
-  const mk=todayKey(); const c=clientById(cid); const isAudit=(tipo==='nr07');
+  const mk=todayKey(); const c=clientById(cid); const isAudit=isAuditType(tipo);
   let v=visitFor(cid,mk,tipo);
-  if(v && isAudit && tier && tier>(v.auditTier||0)){
+  if(v && tipo==='nr07' && tier && tier>(v.auditTier||0)){
     const have=new Set(v.checklist.map(x=>x.id));
     buildNR07(tier).forEach(it=>{ if(!have.has(it.id)) v.checklist.push(it); });
     v.auditTier=tier; v.foco='Assessoria NR-07 · '+tierLabelH(tier); await saveVisits();
   }
   if(!v){
-    const chk = isAudit ? buildNR07(tier)
+    const chk = tipo==='nr07' ? buildNR07(tier)
+      : tipo==='nr05' ? buildNR05()
       : buildChecklist(c).map(i=>({id:i.id,group:i.group,item:i.item,verify:i.verify,nr:i.nr,
           focus:!!i.focus,rank:i.rank||2,acao:'Regularizar — '+i.verify,prio:null}));
-    v={id:'v'+Date.now(),clientId:cid,monthKey:mk,tipo:tipo,auditTier:isAudit?tier:null,
+    v={id:'v'+Date.now(),clientId:cid,monthKey:mk,tipo:tipo,auditTier:(tipo==='nr07')?tier:null,
       tech:S.tech==='Gestão'?c.tech:S.tech,
       client:{name:c.name,segment:c.segment,hours:c.hours,tier:c.tier,locality:c.locality,sgg:c.sgg},
-      foco: isAudit ? ('Assessoria NR-07 · '+tierLabelH(tier)) : curMonth().foco,
+      foco: tipo==='nr07' ? ('Assessoria NR-07 · '+tierLabelH(tier)) : tipo==='nr05' ? TIPOS.nr05.foco : curMonth().foco,
       mes: curMonth().mes, checkIn:null,checkOut:null,
       answers:{},notes:{},photoCount:0,signed:false, checklist:chk};
     DB.visits.push(v); await saveVisits();
@@ -1434,10 +1469,10 @@ function buildExecPdf(jsPDFCtor, ctx, itens, LOGO){
   setF(WH); doc.roundedRect(ML+4, y+4, 44, 19, 1.5, 1.5, 'F');
   try{ const lw=34, lh=lw*152/413; doc.addImage(LOGO,'PNG', ML+4+(44-lw)/2, y+4+(19-lh)/2, lw, lh); }catch(e){}
   const tx=ML+54;
-  F(7.5,'bold'); setT(LG); doc.text('RELATÓRIO DE ASSESSORIA EM SST · CONFIDENCIAL', tx, y+7);
-  F(15,'bold'); setT(WH); doc.text('Assessoria em SST — Foco NR-07 (PCMSO)', tx, y+14);
+  F(7.5,'bold'); setT(LG); doc.text(ctx.repKick||'RELATÓRIO DE ASSESSORIA EM SST · CONFIDENCIAL', tx, y+7);
+  F(15,'bold'); setT(WH); doc.text(ctx.repTitle||'Assessoria em SST — Foco NR-07 (PCMSO)', tx, y+14);
   F(8); setT(LG);
-  doc.splitTextToSize('Visita de assessoria em Segurança e Saúde no Trabalho · Foco: PCMSO (NR-07) · Brantech Engenharia de Segurança do Trabalho', CW-58).forEach((ln,i)=>doc.text(ln, tx, y+19.5+i*4));
+  doc.splitTextToSize(ctx.repSub||'Visita de assessoria em Segurança e Saúde no Trabalho · Brantech Engenharia de Segurança do Trabalho', CW-58).forEach((ln,i)=>doc.text(ln, tx, y+19.5+i*4));
   y+=27;
 
   // ===== CONTROLE DA VISITA =====
@@ -1471,15 +1506,15 @@ function buildExecPdf(jsPDFCtor, ctx, itens, LOGO){
 
   // ===== 1. INTRODUÇÃO =====
   section('1.','Introdução & Escopo');
-  para('Este relatório consolida os resultados da visita de assessoria em Segurança e Saúde no Trabalho (SST), com foco na NR-07 — Programa de Controle Médico de Saúde Ocupacional (PCMSO), realizada na organização '+ctx.cliente+'. Durante a visita foram verificados a conformidade documental, a coerência com o PGR e a consistência operacional do controle de saúde ocupacional, com orientação técnica ao cliente sobre as adequações necessárias — no escopo '+ctx.escopo+' ('+total+' itens verificados).', ML, CW, 9.5);
+  para('Este relatório consolida os resultados da visita de assessoria em Segurança e Saúde no Trabalho (SST), '+(ctx.repIntro||'com foco na NR-07 — PCMSO')+', realizada na organização '+ctx.cliente+'. Durante a visita foram verificados a conformidade documental e a consistência operacional dos requisitos aplicáveis, com orientação técnica ao cliente sobre as adequações necessárias — no escopo '+ctx.escopo+' ('+total+' itens verificados).', ML, CW, 9.5);
 
   // ===== 2. METODOLOGIA =====
-  section('2.','Metodologia da Visita de Assessoria');
-  para('A assessoria seguiu três etapas: (i) verificação documental — existência, vigência e responsabilidade técnica dos documentos do PCMSO e dos exames ocupacionais (ASO); (ii) consistência com o PGR e o eSocial — alinhamento entre riscos mapeados, exames previstos e eventos transmitidos; e (iii) orientação técnica e plano de ação — classificação das não conformidades por prioridade (Alta, Média, Baixa), com recomendação estruturada para cada item.', ML, CW, 9.5);
+  section('2.', ctx.repMethodTitle||'Metodologia da Visita');
+  para(ctx.repMethod||'A visita seguiu etapas de verificação documental, análise de consistência e plano de ação.', ML, CW, 9.5);
 
   // ===== 3. BASE LEGAL =====
   section('3.','Base Legal Aplicável');
-  para('NR-07 (PCMSO), NR-01 (GRO/PGR e capacitação), NR-09 (avaliação de agentes), NR-15 (insalubridade), Decreto nº 3.048/99 e IN INSS/DIRBEN nº 128/2022 (LTCAT/PPP), Manual de Orientação do eSocial (eventos S-2220 e S-2240), CLT (arts. 168 e 169) e Resoluções do CFM aplicáveis à medicina do trabalho.', ML, CW, 9.5);
+  para(ctx.repBase||'NR-07 (PCMSO), NR-01 e demais normas de SST aplicáveis.', ML, CW, 9.5);
 
   // ===== 4. SUMÁRIO =====
   section('4.','Sumário Executivo dos Resultados');
@@ -1612,8 +1647,11 @@ function gerarPdfVisita(v){
     nr:it.nr, prioridade:it.prio||it.prioridade||'Média', risco:it.risco||'', passos:it.passos||null,
     acao:it.acao||'', resp:(v.answers[it.id]||'P'), note:v.notes[it.id]||'' }));
   const sig=S.media&&S.media.signature;
+  const th=tipoInfo(v.tipo);
   const ctx={ cliente:v.client.name, sgg:v.client.sgg||'—', tecnico:v.tech, competencia:v.mes,
-    escopo:v.foco||'Assessoria NR-07', cnpj:'—', func:'—', data_rel:fmtTS(new Date().toISOString()),
+    escopo:v.foco||th.foco, cnpj:'—', func:'—', data_rel:fmtTS(new Date().toISOString()),
+    repTitle:th.repTitle, repKick:th.repKick, repSub:th.repSub, repIntro:th.repIntro, repBase:th.repBase,
+    repMethodTitle:th.repMethodTitle, repMethod:th.repMethod,
     cin_ts:fmtTS(v.checkIn&&v.checkIn.ts), cin_geo:geoTxt(v.checkIn&&v.checkIn.geo),
     cout_ts:fmtTS(v.checkOut&&v.checkOut.ts), cout_geo:geoTxt(v.checkOut&&v.checkOut.geo),
     perm:elapsed(v.checkIn&&v.checkIn.ts, v.checkOut&&v.checkOut.ts),
@@ -1661,13 +1699,14 @@ function execReportNode(v){
     return `<div class="ex-pi ${cls}">${head}<div class="ex-ok">${esc(msg)}</div></div>`;
   }).join('');
 
+  const TH=tipoInfo(v.tipo);
   const rep=el('div','exrep'); rep.id='exrep';
   rep.innerHTML=`
    <table class="ex-hdr"><tr>
      <td class="ex-lgcell"><div class="ex-lg"><img src="${LOGO}"></div></td>
-     <td><div class="ex-kick">Relatório de Assessoria em SST · Confidencial</div>
-       <div class="ex-t">Assessoria em SST — Foco NR-07 (PCMSO)</div>
-       <div class="ex-s">Visita de assessoria em Segurança e Saúde no Trabalho · Foco: PCMSO (NR-07) · Brantech Engenharia de Segurança do Trabalho</div>
+     <td><div class="ex-kick">${esc(TH.repKick)}</div>
+       <div class="ex-t">${esc(TH.repTitle)}</div>
+       <div class="ex-s">${esc(TH.repSub)}</div>
      </td></tr></table>
    <div class="ex-visit">
      <table><tr>
@@ -1676,7 +1715,7 @@ function execReportNode(v){
        <td><span class="ex-k">Técnico responsável</span><br><span class="ex-v">${esc(v.tech)}</span></td>
        <td><span class="ex-k">Competência</span><br><span class="ex-v">${esc(v.mes)}</span></td>
      </tr><tr>
-       <td><span class="ex-k">Escopo</span><br><span class="ex-v">${esc(v.foco||'Assessoria NR-07')}</span></td>
+       <td><span class="ex-k">Escopo</span><br><span class="ex-v">${esc(v.foco||TH.foco)}</span></td>
        <td><span class="ex-k">Segmento</span><br><span class="ex-v">${esc(v.client.segment||'—')}</span></td>
        <td><span class="ex-k">Itens verificados</span><br><span class="ex-v">${ans.length}</span></td>
        <td><span class="ex-k">Data do relatório</span><br><span class="ex-v">${fmtTS(new Date().toISOString())}</span></td>
@@ -1689,21 +1728,15 @@ function execReportNode(v){
    </div>
 
    <div class="ex-sec"><span>1.</span> Introdução &amp; Escopo</div>
-   <p>Este relatório consolida os resultados da <b>visita de assessoria em Segurança e Saúde no Trabalho (SST)</b>, com foco na
-     <b>NR-07 — Programa de Controle Médico de Saúde Ocupacional (PCMSO)</b>, realizada na organização <b>${esc(v.client.name)}</b>.
-     Durante a visita foram verificados a conformidade documental, a coerência com o PGR e a consistência operacional do controle de
-     saúde ocupacional, com orientação técnica ao cliente sobre as adequações necessárias (${ans.length} itens verificados).</p>
+   <p>Este relatório consolida os resultados da <b>visita de assessoria em Segurança e Saúde no Trabalho (SST)</b>, ${esc(TH.repIntro)},
+     realizada na organização <b>${esc(v.client.name)}</b>. Durante a visita foram verificados a conformidade documental e a consistência
+     operacional dos requisitos aplicáveis, com orientação técnica ao cliente sobre as adequações necessárias (${ans.length} itens verificados).</p>
 
-   <div class="ex-sec"><span>2.</span> Metodologia da Visita de Assessoria</div>
-   <p>A assessoria seguiu três etapas: <b>(i) verificação documental</b> — existência, vigência e responsabilidade técnica dos documentos
-     do PCMSO e dos exames ocupacionais (ASO); <b>(ii) consistência com o PGR e o eSocial</b> — alinhamento entre riscos mapeados,
-     exames previstos e eventos transmitidos; e <b>(iii) orientação técnica e plano de ação</b> — classificação das não conformidades
-     por prioridade (Alta, Média, Baixa), com recomendação estruturada para cada item.</p>
+   <div class="ex-sec"><span>2.</span> ${esc(TH.repMethodTitle||'Metodologia da Visita')}</div>
+   <p>${esc(TH.repMethod||'')}</p>
 
    <div class="ex-sec"><span>3.</span> Base Legal Aplicável</div>
-   <p>NR-07 (PCMSO), NR-01 (GRO/PGR e capacitação), NR-09 (avaliação de agentes), NR-15 (insalubridade), Decreto nº 3.048/99 e
-     IN INSS/DIRBEN nº 128/2022 (LTCAT/PPP), Manual de Orientação do eSocial (eventos S-2220 e S-2240), CLT (arts. 168 e 169) e
-     Resoluções do CFM aplicáveis à medicina do trabalho.</p>
+   <p>${esc(TH.repBase)}</p>
 
    <div class="ex-sec"><span>4.</span> Sumário Executivo dos Resultados</div>
    <div class="ex-cards">
@@ -1777,7 +1810,7 @@ function vClient(){
   if(S.panel){ renderPanel(c,v); return; }
   const w=el('div','wrap wvisit');
   w.appendChild(el('div','vhead',`<div class="vh1">${esc(c.name)}</div>
-    <div class="vh2">${v.tipo==='nr07'?('🔎 Assessoria NR-07 · '+tierLabelH(v.auditTier)):(esc(c.segment||'—')+' · '+(c.hours?c.hours+'h':'—')+' · nível '+esc(c.tier||'—'))} · ${esc(v.mes)}</div>`));
+    <div class="vh2">${isAuditType(v.tipo)?(tipoInfo(v.tipo).icon+' '+tipoInfo(v.tipo).short+(v.tipo==='nr07'?(' · '+tierLabelH(v.auditTier)):'')):(esc(c.segment||'—')+' · '+(c.hours?c.hours+'h':'—')+' · nível '+esc(c.tier||'—'))} · ${esc(v.mes)}</div>`));
   const body=el('div','vbody');
   ({ident:tabIdent,checklist:tabChecklist,plano:tabPlano,relatorio:tabRelatorio})[S.vtab||'ident'](body,c,v);
   w.appendChild(body);
@@ -1805,8 +1838,8 @@ function tabIdent(w,c,v){
     <div class="kv"><span class="k">Segmento</span><span class="val">${esc(c.segment||'—')}</span></div>
     <div class="kv"><span class="k">Horas / nível</span><span class="val">${c.hours?c.hours+'h':'—'} · ${esc(c.tier||'—')}</span></div>
     <div class="kv"><span class="k">Técnico</span><span class="val">${esc(v.tech)}</span></div>
-    <div class="kv"><span class="k">Tipo</span><span class="val">${v.tipo==='nr07'?('Assessoria NR-07 · '+tierLabelH(v.auditTier)):'Assessoria mensal'}</span></div>
-    <div class="kv"><span class="k">Competência</span><span class="val">${esc(v.mes)}${v.tipo==='nr07'?'':' · foco: '+esc(v.foco)}</span></div>
+    <div class="kv"><span class="k">Tipo</span><span class="val">${isAuditType(v.tipo)?(tipoInfo(v.tipo).short+(v.tipo==='nr07'?(' · '+tierLabelH(v.auditTier)):'')):'Assessoria mensal'}</span></div>
+    <div class="kv"><span class="k">Competência</span><span class="val">${esc(v.mes)}${isAuditType(v.tipo)?'':' · foco: '+esc(v.foco)}</span></div>
     <div class="kv"><span class="k">Agenda</span><span class="val"><span class="pill ${st.pill}">${st.label}</span></span></div>`;
   w.appendChild(card);
   const grid=el('div','qgrid');
@@ -2057,7 +2090,7 @@ function tabAgenda(w,c){
     const k=v.checkOut?'done':v.checkIn?'next':'late';
     const nc=Object.values(v.answers||{}).filter(a=>a==='N').length;
     const ev=el('div','ev '+k,`<div class="ed">${v.checkIn?fmtTS(v.checkIn.ts):v.mes}</div>
-      <div class="et">${v.tipo==='nr07'?'Assessoria NR-07':'Assessoria'} · ${esc(v.mes)} — ${v.checkOut?'concluída':v.checkIn?'em andamento':'aberta'}</div>
+      <div class="et">${isAuditType(v.tipo)?tipoInfo(v.tipo).short:'Assessoria'} · ${esc(v.mes)} — ${v.checkOut?'concluída':v.checkIn?'em andamento':'aberta'}</div>
       <div class="mini">${esc(v.foco||'')}${v.checkOut?` · ${elapsed(v.checkIn&&v.checkIn.ts,v.checkOut.ts)}`:''}${nc?` · <b style="color:var(--red)">${nc} NC</b>`:''}${v.photoCount?` · 📷 ${v.photoCount}`:''}${v.signed?' · ✍ assinado':''}</div>`);
     if(v.checkOut){ ev.style.cursor='pointer'; ev.onclick=async()=>{ await loadMedia(v.id); go('doc',{visit:v,clientId:c.id}); }; }
     inner.appendChild(ev);
@@ -2386,11 +2419,12 @@ function comprovanteNode(v){
   const validos=ans.length-na, pct=validos?Math.round(conf/validos*100):0;
   const nf=ans.reduce((a,b)=>a+b.photos.length,0);
   const sig=S.media&&S.media.signature; const pl=planoItens(v);
-  const isAudit=(v.tipo==='nr07');
-  const docTitle=isAudit?'Relatório de assessoria — NR-07 (PCMSO)':'Comprovante de visita — Assessoria SST';
+  const isAudit=isAuditType(v.tipo);
+  const TH=tipoInfo(v.tipo);
+  const docTitle=isAudit?TH.docTitle:'Comprovante de visita — Assessoria SST';
   const escopoLabel=isAudit?'Escopo':'Foco do mês';
-  const sealTxt=isAudit?(pend?'⚠ ASSESSORIA REGISTRADA (COM PENDÊNCIAS)':'✓ ASSESSORIA REGISTRADA')
-                        :(pend?'⚠ VISITA REGISTRADA (COM PENDÊNCIAS)':'✓ VISITA REGISTRADA');
+  const _seal=isAudit?TH.seal:'VISITA';
+  const sealTxt=(pend?'⚠ '+_seal+' REGISTRADA (COM PENDÊNCIAS)':'✓ '+_seal+' REGISTRADA');
   const planoHTML = pl.length ? `<div class="sectlabel"><span>Plano de ação</span><span class="ln"></span></div>`+
     pl.map(x=>`<div class="clrow"><span class="st ${x.prio==='Alta'?'N':x.prio==='Média'?'P':'A'}">${x.prio}</span>
       <span class="grow"><b>${esc(x.item)}</b> <span class="mini">(${esc(x.nr)})</span><br>
