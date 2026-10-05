@@ -32,7 +32,7 @@
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   h1.title,.vhead .vh1,.kpi .n,.stamp .ts,.seal,.idxchip .val{font-family:var(--disp)}
   html,body{margin:0;padding:0}
-  body{font-family:var(--sans);background:var(--paper);color:var(--ink);font-size:15px;line-height:1.45;padding-bottom:44px}
+  body{font-family:var(--sans);background:var(--paper);color:var(--ink);font-size:15px;line-height:1.45;padding-bottom:44px;overflow-x:hidden}
   .app{max-width:560px;margin:0 auto;min-height:100vh}
   .bar{position:sticky;top:0;z-index:30;background:var(--deep);display:flex;align-items:center;gap:10px;
     padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.08)}
@@ -99,11 +99,27 @@
   .ck.nc{border-color:var(--red);border-left-width:4px}
   .ck.ok{border-left:4px solid var(--brand)}
   .ck .q{font-weight:700;font-size:14.5px}
-  .ck .v{font-size:12.5px;color:var(--muted);margin-top:2px}
+  .ck .v{font-size:14px;color:var(--ink);font-weight:700;margin-top:1px;line-height:1.35}
   .ck .nr{font-size:10.5px;color:var(--brand);font-weight:800;margin-top:4px;letter-spacing:.4px}
   .opts{display:flex;gap:6px;margin-top:10px}
   .opt{flex:1;text-align:center;border:1.5px solid var(--line);border-radius:9px;padding:9px 3px;font-size:12.5px;
     font-weight:800;cursor:pointer;background:#fff;color:var(--muted)}
+  .ck .ckhead{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:5px}
+  .ck .cknum{font-size:11px;font-weight:800;letter-spacing:.5px;color:var(--brand);text-transform:uppercase}
+  .ck .ckprio{font-size:10.5px;font-weight:700;padding:2px 9px;border-radius:20px;white-space:nowrap}
+  .ck .ckprio.alta{background:var(--no-bg);color:var(--no)}
+  .ck .ckprio.media{background:#FDF3E7;color:var(--amber)}
+  .ck .ckprio.baixa{background:var(--na-bg);color:var(--na)}
+  .opt .bx{display:inline-block;width:12px;height:12px;border:1.6px solid currentColor;border-radius:3px;margin-right:6px;vertical-align:-2px;opacity:.5}
+  .opt.on .bx{opacity:1;background:currentColor}
+  .ck .guia{margin-top:9px;background:#F3F8F5;border:1px solid var(--line);border-radius:9px;padding:0 12px}
+  .ck .guia summary{cursor:pointer;font-size:12px;font-weight:700;color:var(--brand);padding:10px 0;list-style:none;outline:none}
+  .ck .guia summary::-webkit-details-marker{display:none}
+  .ck .guia summary:before{content:"\25B8  "}
+  .ck .guia[open] summary:before{content:"\25BE  "}
+  .ck .guia .gl{font-size:12px;color:var(--ink);line-height:1.5;padding:0 0 10px}
+  .ck .guia .gl b{color:var(--brand)}
+  .ck .guia .gl.ev{color:var(--muted)}
   .opt.c.on{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}
   .opt.n.on{background:var(--no-bg);border-color:var(--no);color:var(--no)}
   .opt.a.on{background:var(--na-bg);border-color:var(--na);color:var(--na)}
@@ -121,10 +137,10 @@
   .thumb .x{position:absolute;top:1px;right:1px;background:rgba(10,15,12,.78);color:#fff;border:none;
     border-radius:50%;width:17px;height:17px;font-size:11px;line-height:1;cursor:pointer;padding:0}
   .phcount{font-size:11px;color:var(--brand);font-weight:800}
-  .lb{position:fixed;inset:0;background:rgba(6,48,26,.94);z-index:60;display:grid;place-items:center;padding:20px}
+  .lb{position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(6,48,26,.94);z-index:60;display:grid;place-items:center;padding:20px}
   .lb img{max-width:100%;max-height:82vh;border-radius:10px}
   .lb button{position:absolute;top:16px;right:16px;background:#fff;border:none;border-radius:50%;width:38px;height:38px;font-size:19px;cursor:pointer;font-weight:700}
-  .sheet-bg{position:fixed;inset:0;background:rgba(6,48,26,.55);z-index:50;display:flex;align-items:flex-end;justify-content:center}
+  .sheet-bg{position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(6,48,26,.55);z-index:50;display:flex;align-items:flex-end;justify-content:center}
   .sheet{background:#fff;width:100%;max-width:560px;border-radius:16px 16px 0 0;padding:18px 16px 22px;max-height:92vh;overflow-y:auto}
   .sheet h3{margin:0 0 3px;font-size:18px;font-weight:800;letter-spacing:-.3px}
   .sheet h3 em{font-style:normal;color:var(--brand)}
@@ -138,14 +154,14 @@
   .fld2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
   .sigbox{border:1.5px dashed var(--line);border-radius:11px;background:#FBFDFC;position:relative;overflow:hidden}
   .sigbox canvas{display:block;width:100%;height:150px;touch-action:none;cursor:crosshair}
-  .sigbox .ghost{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;color:#A9BBB1;font-size:13px;font-weight:600}
+  .sigbox .ghost{position:absolute;top:0;right:0;bottom:0;left:0;display:grid;place-items:center;pointer-events:none;color:#A9BBB1;font-size:13px;font-weight:600}
   .sigbox.signed .ghost{display:none}
   .sigline{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
   .sigline span{font-size:11.5px;color:var(--muted)}
   .sigline button{background:none;border:none;color:var(--red);font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;padding:0}
   .absent{display:flex;align-items:center;gap:9px;margin:12px 0;font-size:13.5px;cursor:pointer}
   .absent input{width:18px;height:18px;accent-color:var(--brand)}
-  .sectlabel{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--ink);
+  .sectlabel{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--brand);
     margin:17px 0 8px;display:flex;align-items:center;gap:9px}
   .sectlabel .ln{flex:1;height:1px;background:var(--line)}
   .sectlabel.focus{color:var(--amber)}
@@ -250,7 +266,7 @@
   .tagpdf{font-size:9.5px;font-weight:800;background:var(--red-soft);color:var(--red);padding:2px 5px;border-radius:4px}
   .tagseg{font-size:9.5px;font-weight:800;background:var(--soft);color:var(--deep);padding:2px 5px;border-radius:4px}
   /* ---- roteiro (modo apresentação) ---- */
-  .rt{position:fixed;inset:0;background:#fff;z-index:70;display:flex;flex-direction:column}
+  .rt{position:fixed;top:0;right:0;bottom:0;left:0;background:#fff;z-index:70;display:flex;flex-direction:column}
   .rt .rh{background:var(--deep);padding:11px 14px;border-bottom:3px solid var(--bright);flex-shrink:0}
   .rt .rh .rt1{color:var(--bright);font-size:9.5px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase}
   .rt .rh .rt2{color:#fff;font-size:15px;font-weight:800;margin-top:1px}
@@ -354,10 +370,10 @@
   /* ---- medidor circular (índice) estilo auditoria ---- */
   .gaugecard{display:flex;gap:15px;align-items:center;background:var(--card);border:1px solid var(--line);
     border-radius:var(--r);padding:15px;margin-bottom:14px;box-shadow:var(--shadow)}
-  .gauge{position:relative;width:120px;height:120px;flex:0 0 120px}
+  .gauge{position:relative;width:132px;height:132px;flex:0 0 132px}
   .gauge svg{transform:rotate(-90deg)}
-  .gauge .center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-  .gauge .center .big{font-family:var(--disp);font-size:31px;font-weight:700;line-height:1}
+  .gauge .center{position:absolute;top:0;right:0;bottom:0;left:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .gauge .center .big{font-family:var(--disp);font-size:34px;font-weight:700;line-height:1}
   .gauge .center .big .u{font-size:15px;font-weight:600}
   .gauge .center .cap{font-size:9.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;font-weight:600;margin-top:4px}
   .gmeta{flex:1;min-width:0}
@@ -436,7 +452,7 @@
   .editado{font-size:10px;font-weight:700;color:var(--brand);background:var(--soft);padding:1px 6px;border-radius:5px;vertical-align:middle}
 
   /* ===== relatório executivo (formato aprovado) ===== */
-  .exwrap{position:fixed;inset:0;background:#fff;z-index:200;overflow:auto;-webkit-overflow-scrolling:touch}
+  .exwrap{position:fixed;top:0;right:0;bottom:0;left:0;background:#fff;z-index:200;overflow:auto;-webkit-overflow-scrolling:touch}
   .exwrap .extools{position:sticky;top:0;display:flex;gap:8px;padding:10px 12px;background:var(--deep);z-index:5}
   .exwrap,.exrep{color-scheme:light}
   .exrep{max-width:800px;margin:0 auto;padding:14px 14px 40px;font-family:var(--sans);color:#12211E;font-size:13px;line-height:1.5;background:#fff}
@@ -506,6 +522,32 @@
   .ex-hdr{background-image:linear-gradient(#0B3B34,#0B3B34)!important}
   .extools{background-image:linear-gradient(#0B3B34,#0B3B34)!important}
 
+  .startsheet .agendar-btn{width:100%;justify-content:center;border:1.5px solid var(--brand);color:var(--brand);font-weight:700}
+  .startsheet .agendar-btn b{font-weight:800}
+  .startsheet .ou{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:11px;font-weight:700;
+    text-transform:uppercase;letter-spacing:.6px;margin:13px 0 11px}
+  .startsheet .ou:before,.startsheet .ou:after{content:"";flex:1;height:1px;background:var(--line)}
+  .startsheet .envrow{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
+  .startsheet .envrow .k{color:var(--muted);font-weight:700;white-space:nowrap}
+  .startsheet .envrow .v{color:var(--ink);text-align:right;word-break:break-all}
+  .startsheet .envrow .v.na{color:var(--no);font-style:italic}
+  .startsheet .envnote{font-size:11.5px;color:var(--muted);background:#F3F8F5;border-radius:9px;padding:9px 11px;margin:11px 0 4px;line-height:1.5}
+  .btn[disabled]{opacity:.45;pointer-events:none}
+  @media (min-width:820px){
+    body{background:#D8E3DE}
+    .app{max-width:1080px;background:var(--card);box-shadow:0 10px 44px rgba(6,48,26,.16);min-height:100vh}
+    .wrap{padding:22px 26px}
+    .bnav{max-width:1080px}
+    .sheet,.exwrap .exrep{max-width:640px}
+    .login{max-width:440px}
+    /* lista de clientes em 2 colunas no computador (minmax evita estouro na horizontal) */
+    .crlist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;align-items:start}
+    .crlist .crow{margin-bottom:0;min-width:0}
+    .crlist .listcount,.crlist .empty{grid-column:1/-1}
+  }
+  @media (min-width:1240px){
+    .app{max-width:1180px}
+  }
   @media print{
     @page{size:A4;margin:12mm}
     body>.app{display:none!important}
@@ -1227,7 +1269,7 @@ function vDash(){
   });
   w.appendChild(chips);
 
-  const holder=el('div'); w.appendChild(holder);
+  const holder=el('div','crlist'); w.appendChild(holder);
   const stMap={done:'done',prog:'prog',late:'late',hoje:'pend',ag:'pend',sem:'pend'};
   const draw=(q='')=>{
     holder.innerHTML='';
@@ -1262,15 +1304,47 @@ function buildNR07(tier){
   return NR07DATA.itens.filter(i=>i.rank<=tier).map(i=>({
     id:i.id, group:i.bloco, item:i.item, verify:i.verify, nr:i.nr,
     rank:i.rank, focus:false, acao:i.acao, prio:i.prioridade,
-    risco:i.risco||'', passos:i.passos||null}));
+    risco:i.risco||'', passos:i.passos||null, manter:i.manter||''}));
 }
 const NR05DATA = {"itens": [{"id": "n0", "bloco": "Constituição", "prioridade": "Alta", "item": "Enquadramento (Quadro I)", "nr": "NR-05 (Quadro I — dimensionamento)", "verify": "A empresa possui enquadramento de CIPA conforme o Quadro I da NR-05?", "acao": "Verificar o CNAE e o número de empregados do estabelecimento no Quadro I da NR-05.", "rank": 1, "risco": "Dimensionamento incorreto deixa a CIPA irregular (ou ausente quando obrigatória) e sujeita a empresa a autuação do MTE.", "passos": ["Verificar o CNAE e o número de empregados do estabelecimento no Quadro I da NR-05", "Constituir e dimensionar a CIPA conforme o enquadramento, ou registrar a dispensa quando não aplicável"], "evidencia": "Quadro de dimensionamento e enquadramento no Quadro I."}, {"id": "n1", "bloco": "Constituição", "prioridade": "Alta", "item": "Representante nomeado", "nr": "NR-05 (item 5.4.13)", "verify": "Quando não se enquadra no Quadro I, a empresa nomeou um representante entre os empregados para auxiliar nas ações de prevenção?", "acao": "Formalizar a nomeação de um representante entre os empregados (item 5.4.13).", "rank": 1, "risco": "Sem representante nomeado, o estabelecimento fica sem agente de prevenção exigido pela norma — não conformidade à NR-05.", "passos": ["Formalizar a nomeação de um representante entre os empregados (item 5.4.13)", "Realizar o treinamento de capacitação do representante e manter o registro"], "evidencia": "Documento de nomeação e certificado de capacitação do representante."}, {"id": "n2", "bloco": "Documentação", "prioridade": "Média", "item": "Atas de eleição e posse", "nr": "NR-05 (item 5.4.8)", "verify": "A empresa forneceu cópias das atas de eleição e de posse aos membros titulares e suplentes da CIPA?", "acao": "Disponibilizar aos titulares e suplentes cópias das atas de eleição e de posse (item 5.4.8).", "rank": 1, "risco": "Falha em disponibilizar as atas fragiliza a comprovação da constituição regular da CIPA em fiscalização.", "passos": ["Disponibilizar aos titulares e suplentes cópias das atas de eleição e de posse (item 5.4.8)", "Manter evidência do recebimento (recibo assinado ou registro eletrônico)"], "evidencia": "Atas de eleição e posse e o comprovante de disponibilização."}, {"id": "n3", "bloco": "Reuniões", "prioridade": "Alta", "item": "Reuniões mensais e atas", "nr": "NR-05 (item 5.6.1)", "verify": "As reuniões mensais da CIPA estão sendo realizadas conforme o calendário anual, com atas elaboradas e assinadas?", "acao": "Realizar reuniões ordinárias mensais conforme calendário previamente estabelecido (item 5.6.1).", "rank": 1, "risco": "Reuniões ou atas ausentes descaracterizam o funcionamento da CIPA e ensejam autuação.", "passos": ["Realizar reuniões ordinárias mensais conforme calendário previamente estabelecido (item 5.6.1)", "Registrar cada reunião em ata assinada pelos presentes e disponibilizá-la a todos os integrantes (admite-se meio eletrônico)"], "evidencia": "Calendário anual e as atas mensais assinadas."}, {"id": "n4", "bloco": "Integração", "prioridade": "Média", "item": "Programas apresentados à CIPA", "nr": "NR-05 (participação da CIPA nos programas de SST)", "verify": "Os programas da empresa (PGR/PGRTR e PCMSO) foram apresentados à CIPA e registrados em ata?", "acao": "Apresentar à CIPA o PGR e o PCMSO, permitindo o acompanhamento e a participação da Comissão.", "rank": 1, "risco": "Sem a apresentação, a CIPA fica sem participar do desenvolvimento e da implementação das ações de SST.", "passos": ["Apresentar à CIPA o PGR e o PCMSO, permitindo o acompanhamento e a participação da Comissão", "Registrar a apresentação e os principais assuntos tratados em ata"], "evidencia": "Ata da CIPA em que consta a apresentação dos programas (fotografar a ata)."}, {"id": "n5", "bloco": "Assédio", "prioridade": "Alta", "item": "Canal de denúncia (assédio)", "nr": "NR-01 (item 1.4.1.1, “b”)", "verify": "A empresa possui procedimento/canal interno para denúncias de assédio sexual e outras formas de violência, garantindo o anonimato da pessoa denunciante?", "acao": "Instituir procedimento formal de recebimento, registro, acompanhamento e apuração das denúncias.", "rank": 1, "risco": "A ausência de canal formal descumpre a NR-01, expõe a empresa a responsabilização e a passivos, e desprotege as vítimas.", "passos": ["Instituir procedimento formal de recebimento, registro, acompanhamento e apuração das denúncias", "Definir as medidas e sanções administrativas cabíveis e garantir o anonimato da pessoa denunciante", "Manter registros das providências adotadas"], "evidencia": "Procedimento/política formal e evidência do canal de denúncia."}, {"id": "n6", "bloco": "Assédio", "prioridade": "Alta", "item": "Capacitação anual (assédio)", "nr": "NR-01 (item 1.4.1.1)", "verify": "A empresa aborda anualmente temas de prevenção e combate ao assédio sexual e a outras formas de violência no trabalho?", "acao": "Realizar, no mínimo a cada 12 meses, ações de capacitação, orientação e sensibilização com todos os níveis hierárquicos.", "rank": 1, "risco": "Sem capacitação periódica, a empresa descumpre a NR-01 e amplia o risco de ocorrências e de responsabilização.", "passos": ["Realizar, no mínimo a cada 12 meses, ações de capacitação, orientação e sensibilização com todos os níveis hierárquicos", "Abordar prevenção e combate à violência, ao assédio, à discriminação, à igualdade e à diversidade", "Manter os registros de realização (conteúdo, datas e presença)"], "evidencia": "Lista de presença e material das ações (fotografar a lista de presença)."}, {"id": "n7", "bloco": "Acidentes", "prioridade": "Alta", "item": "Análise de acidentes", "nr": "NR-05 (item 5.3.1, alínea “f”)", "verify": "A CIPA acompanha a análise dos acidentes e doenças do trabalho e propõe medidas para prevenir a recorrência?", "acao": "Garantir que a CIPA participe e acompanhe as investigações de acidentes e doenças do trabalho.", "rank": 1, "risco": "Sem o acompanhamento da CIPA, causas não são tratadas e os acidentes tendem a se repetir.", "passos": ["Garantir que a CIPA participe e acompanhe as investigações de acidentes e doenças do trabalho", "Avaliar as causas e propor medidas corretivas e preventivas para evitar novas ocorrências", "Manter os registros e evidências das ações"], "evidencia": "CAT e investigação dos acidentes; verificar a menção em ata da CIPA."}, {"id": "n8", "bloco": "Capacitação", "prioridade": "Alta", "item": "Treinamento antes da posse", "nr": "NR-05 (itens 5.7.1 e 5.7.2)", "verify": "A empresa realizou o treinamento do representante nomeado e dos membros titulares e suplentes da CIPA antes da posse?", "acao": "Garantir o treinamento do representante e dos membros titulares e suplentes, preferencialmente antes da posse.", "rank": 1, "risco": "Posse sem treinamento deixa a CIPA sem a capacitação exigida e sujeita a empresa a autuação.", "passos": ["Garantir o treinamento do representante e dos membros titulares e suplentes, preferencialmente antes da posse", "Atender ao conteúdo e à carga horária dos itens 5.7.1 e 5.7.2", "Manter certificados e registros de participação"], "evidencia": "Certificado, conteúdo programático, carga horária, lista de presença e datas do treinamento e da posse."}, {"id": "n9", "bloco": "Promoção", "prioridade": "Média", "item": "SIPAT anual", "nr": "NR-05 (promoção da SIPAT pela CIPA)", "verify": "A empresa realiza anualmente a SIPAT (Semana Interna de Prevenção de Acidentes)?", "acao": "Promover a SIPAT anualmente, em conjunto com o SESMT quando houver, conforme programação definida pela CIPA.", "rank": 1, "risco": "A não realização da SIPAT descumpre a NR-05 e perde uma das principais ações preventivas do ano.", "passos": ["Promover a SIPAT anualmente, em conjunto com o SESMT quando houver, conforme programação definida pela CIPA", "Contemplar temas de prevenção de acidentes, doenças ocupacionais, assédio e violência", "Manter registros das atividades realizadas"], "evidencia": "Programação, divulgação, lista de participação e registros/fotos das atividades."}]};
 function buildNR05(){
   return NR05DATA.itens.map(i=>({
     id:i.id, group:i.bloco, item:i.item, verify:i.verify, nr:i.nr,
     rank:1, focus:false, acao:i.acao, prio:i.prioridade,
-    risco:i.risco||'', passos:i.passos||null, evidencia:i.evidencia||''}));
+    risco:i.risco||'', passos:i.passos||null, evidencia:i.evidencia||'', manter:i.manter||''}));
 }
+const NR06DATA = {"itens": [{"id": "e0", "bloco": "Fornecimento", "prioridade": "Alta", "item": "EPI fornecido gratuitamente", "nr": "NR-06 (item 6.3)", "verify": "A empresa fornece gratuitamente os EPIs adequados aos riscos, em perfeito estado de conservação e funcionamento?", "acao": "Fornecer gratuitamente o EPI adequado a cada risco, sempre que a proteção coletiva for inviável ou insuficiente.", "rank": 1, "risco": "Sem EPI adequado e gratuito, o trabalhador fica exposto ao risco; a empresa responde por acidente e por autuação do MTE.", "passos": ["Fornecer gratuitamente o EPI adequado a cada risco, sempre que a proteção coletiva for inviável ou insuficiente", "Garantir que os EPIs estejam em perfeito estado de conservação e funcionamento"], "evidencia": "Registros de aquisição e os EPIs disponíveis no posto de trabalho.", "manter": "Manter o fornecimento gratuito e a reposição dos EPIs adequados a cada risco."}, {"id": "e1", "bloco": "Certificação (CA)", "prioridade": "Alta", "item": "CA válido", "nr": "NR-06 (item 6.2)", "verify": "Todos os EPIs em uso possuem Certificado de Aprovação (CA) válido?", "acao": "Conferir o número do CA de cada EPI e sua validade junto ao órgão nacional competente.", "rank": 1, "risco": "EPI sem CA válido não garante a proteção especificada e é irregular perante o órgão competente.", "passos": ["Conferir o número do CA de cada EPI e sua validade junto ao órgão nacional competente", "Substituir os itens com CA vencido ou cancelado"], "evidencia": "Relação de EPIs com o nº do CA e a respectiva validade.", "manter": "Manter o controle da validade dos CAs e a substituição dos itens vencidos."}, {"id": "e2", "bloco": "Adequação ao risco", "prioridade": "Alta", "item": "Adequado ao risco (PGR)", "nr": "NR-06 (itens 6.5 e 6.6.1 “a”) / NR-01", "verify": "Os EPIs fornecidos são adequados aos riscos identificados no PGR / inventário de riscos?", "acao": "Cruzar cada risco do inventário do PGR com o EPI correspondente.", "rank": 1, "risco": "EPI inadequado ao risco dá falsa sensação de proteção e não evita o dano.", "passos": ["Cruzar cada risco do inventário do PGR com o EPI correspondente", "Manter uma matriz de EPI por função/risco e ajustá-la a cada revisão do PGR"], "evidencia": "Matriz de EPI por função x risco, alinhada ao PGR.", "manter": "Manter a matriz de EPI por função atualizada a cada revisão do PGR."}, {"id": "e3", "bloco": "Registro (ficha)", "prioridade": "Alta", "item": "Ficha de entrega", "nr": "NR-06 (item 6.6.1 “h”)", "verify": "Existe registro/ficha de entrega dos EPIs, assinada (física ou eletronicamente) por cada trabalhador?", "acao": "Manter ficha de EPI por trabalhador contendo item, CA, data e assinatura.", "rank": 1, "risco": "Sem registro de entrega, a empresa não comprova o fornecimento e fragiliza a defesa em ações trabalhistas.", "passos": ["Manter ficha de EPI por trabalhador contendo item, CA, data e assinatura", "Atualizar o registro (admite-se meio eletrônico) a cada entrega ou substituição"], "evidencia": "Fichas de EPI assinadas ou o registro eletrônico de fornecimento.", "manter": "Manter as fichas de entrega atualizadas a cada fornecimento ou substituição."}, {"id": "e4", "bloco": "Treinamento", "prioridade": "Média", "item": "Treinamento de uso", "nr": "NR-06 (item 6.6.1 “d”)", "verify": "Os trabalhadores foram orientados e treinados sobre o uso adequado, a guarda e a conservação dos EPIs?", "acao": "Orientar e treinar sobre o uso correto, a guarda e a conservação de cada EPI.", "rank": 1, "risco": "Sem orientação, o EPI é usado de forma incorreta e perde a eficácia de proteção.", "passos": ["Orientar e treinar sobre o uso correto, a guarda e a conservação de cada EPI", "Registrar a capacitação (conteúdo, data e lista de presença)"], "evidencia": "Lista de presença e conteúdo da orientação/treinamento.", "manter": "Manter a orientação periódica e sempre na admissão ou troca de função."}, {"id": "e5", "bloco": "Uso e fiscalização", "prioridade": "Alta", "item": "Uso exigido e fiscalizado", "nr": "NR-06 (item 6.6.1 “b”)", "verify": "A empresa exige e fiscaliza o uso correto dos EPIs no posto de trabalho?", "acao": "Definir e comunicar a obrigatoriedade do uso por posto/atividade.", "rank": 1, "risco": "Não exigir o uso caracteriza omissão do empregador e o responsabiliza por eventuais acidentes.", "passos": ["Definir e comunicar a obrigatoriedade do uso por posto/atividade", "Fiscalizar em campo e registrar as advertências quando necessário"], "evidencia": "Observação em campo e registros de fiscalização/advertência.", "manter": "Manter a fiscalização contínua do uso correto no posto de trabalho."}, {"id": "e6", "bloco": "Substituição", "prioridade": "Média", "item": "Substituição imediata", "nr": "NR-06 (item 6.6.1 “e”)", "verify": "Os EPIs danificados ou extraviados são substituídos imediatamente?", "acao": "Disponibilizar reposição imediata quando o EPI danificar ou se extraviar.", "rank": 1, "risco": "EPI danificado não protege; a demora na troca mantém o trabalhador exposto ao risco.", "passos": ["Disponibilizar reposição imediata quando o EPI danificar ou se extraviar", "Registrar a substituição na ficha do trabalhador"], "evidencia": "Estoque de reposição e registros de troca.", "manter": "Manter estoque mínimo de reposição e a troca imediata quando necessário."}, {"id": "e7", "bloco": "Higiene e manutenção", "prioridade": "Baixa", "item": "Higiene e manutenção", "nr": "NR-06 (item 6.6.1 “f”)", "verify": "A empresa se responsabiliza pela higienização e pela manutenção periódica dos EPIs?", "acao": "Definir rotina de higienização e manutenção conforme as instruções do fabricante.", "rank": 1, "risco": "EPI mal higienizado ou sem manutenção perde a proteção e pode causar agravos (dermatites, contaminação).", "passos": ["Definir rotina de higienização e manutenção conforme as instruções do fabricante", "Registrar as manutenções periódicas"], "evidencia": "Rotina e registros de higienização/manutenção.", "manter": "Manter a rotina de higienização e manutenção conforme o fabricante."}, {"id": "e8", "bloco": "Estado de conservação", "prioridade": "Média", "item": "Estado de conservação", "nr": "NR-06 (itens 6.3 e 6.6.1 “e”)", "verify": "Os EPIs em uso estão em bom estado de conservação e dentro da validade indicada pelo fabricante?", "acao": "Inspecionar periodicamente o estado e a validade dos EPIs em uso.", "rank": 1, "risco": "EPI vencido ou desgastado não oferece a proteção especificada.", "passos": ["Inspecionar periodicamente o estado e a validade dos EPIs em uso", "Retirar de uso e substituir os itens vencidos ou danificados"], "evidencia": "Inspeção dos EPIs em campo e verificação de validade.", "manter": "Manter inspeções periódicas do estado e da validade dos EPIs."}, {"id": "e9", "bloco": "Responsabilidades do trabalhador", "prioridade": "Baixa", "item": "Responsabilidades do trabalhador", "nr": "NR-06 (item 6.7.1)", "verify": "Os trabalhadores estão cientes de suas responsabilidades (usar, guardar, conservar e comunicar alterações)?", "acao": "Comunicar as responsabilidades do item 6.7.1 (uso, guarda, conservação e comunicação de alteração).", "rank": 1, "risco": "O desconhecimento das responsabilidades leva ao mau uso e à não comunicação de defeitos do EPI.", "passos": ["Comunicar as responsabilidades do item 6.7.1 (uso, guarda, conservação e comunicação de alteração)", "Reforçar essas responsabilidades nas capacitações e nos DDS"], "evidencia": "Registro de ciência do trabalhador (termo ou lista de presença).", "manter": "Manter a comunicação das responsabilidades nas capacitações e nos DDS."}]};
+function buildNR06(){
+  return NR06DATA.itens.map(i=>({
+    id:i.id, group:i.bloco, item:i.item, verify:i.verify, nr:i.nr,
+    rank:1, focus:false, acao:i.acao, prio:i.prioridade,
+    risco:i.risco||'', passos:i.passos||null, evidencia:i.evidencia||'', manter:i.manter||''}));
+}
+
+;(function(){ const M={
+ a0:'Manter o PCMSO vigente e assinado; revisar periodicamente junto ao médico responsável.',
+ a1:'Manter o PCMSO alinhado ao PGR, atualizando-o a cada revisão do Inventário de Riscos.',
+ a2:'Manter o fluxo de exames admissionais antes do início das atividades.',
+ a3:'Manter o controle de vencimentos e a convocação dos periódicos dentro do prazo.',
+ a4:'Manter o procedimento de exame de retorno após afastamentos de 30 dias ou mais.',
+ a5:'Manter os ASOs completos e arquivados conforme o item 7.5.19.1.',
+ a6:'Manter a realização dos exames complementares previstos para cada risco/função.',
+ a7:'Manter a emissão anual do Relatório Analítico e a apresentação à CIPA/direção.',
+ a8:'Manter a guarda e o sigilo dos prontuários sob responsabilidade do médico coordenador.',
+ a9:'Manter o procedimento de exame de mudança de risco antes de cada mudança de função/risco.',
+ n0:'Manter o dimensionamento da CIPA conforme o Quadro I, revisando a cada mudança de porte ou CNAE.',
+ n1:'Manter o representante nomeado e capacitado enquanto não houver obrigatoriedade de CIPA.',
+ n2:'Manter as atas de eleição e posse disponibilizadas aos membros e devidamente arquivadas.',
+ n3:'Manter as reuniões mensais no calendário, com atas assinadas e divulgadas.',
+ n4:'Manter a apresentação do PGR e do PCMSO à CIPA, registrando em ata.',
+ n5:'Manter o canal de denúncia ativo e divulgado, preservando o anonimato da pessoa denunciante.',
+ n6:'Manter as ações anuais de prevenção e combate ao assédio e à violência, com registros.',
+ n7:'Manter a participação da CIPA na análise de acidentes e na proposição de medidas preventivas.',
+ n8:'Manter o treinamento dos membros antes da posse, com certificados arquivados.',
+ n9:'Manter a realização anual da SIPAT, com programação, divulgação e registros.'
+ };
+ try{ [NR07DATA.itens, NR05DATA.itens].forEach(arr=>arr.forEach(it=>{ if(M[it.id]) it.manter=M[it.id]; })); }catch(e){}
+})();
 const TIPOS={
  nr07:{menu:'Assessoria NR-07 · PCMSO', short:'Assessoria NR-07', foco:'Assessoria NR-07', icon:'🔎',
    audit:true, docTitle:'Relatório de assessoria — NR-07 (PCMSO)', seal:'ASSESSORIA',
@@ -1288,6 +1362,15 @@ const TIPOS={
    repBase:'NR-05 (CIPA e Prevenção de Assédio), NR-01 (item 1.4.1.1 — prevenção e combate ao assédio e à violência), Lei nº 14.457/2022 e demais normas correlatas de SST.',
    repMethodTitle:'Metodologia da Auditoria', repMethod:'A auditoria seguiu três etapas: (i) verificação documental — atas de eleição, posse e reuniões, calendário anual, treinamentos, procedimentos e demais evidências exigidas pela NR-05; (ii) verificação das práticas — funcionamento da CIPA, ações de prevenção e combate ao assédio e à violência e o tratamento de acidentes e doenças do trabalho; e (iii) orientação técnica e plano de ação — classificação das não conformidades por prioridade (Alta, Média, Baixa), com recomendação e evidência para cada item.',
    info:'Auditoria de NR-05 (CIPA e Prevenção de Assédio) · 10 itens.'},
+ nr06:{menu:'Auditoria NR-06 · EPI', short:'Auditoria NR-06', foco:'Auditoria NR-06 · EPI', icon:'🦺',
+   audit:true, docTitle:'Relatório de auditoria — NR-06 (EPI)', seal:'AUDITORIA',
+   repTitle:'Auditoria NR-06 — Equipamento de Proteção Individual (EPI)', repKick:'RELATÓRIO DE AUDITORIA · CONFIDENCIAL',
+   repSub:'Auditoria da gestão de Equipamento de Proteção Individual (EPI) · Brantech Engenharia de Segurança do Trabalho',
+   repIntro:'com foco na NR-06 — Equipamento de Proteção Individual (EPI): fornecimento, adequação ao risco, certificação, uso e controle',
+   repBase:'NR-06 (EPI), NR-01 (GRO/PGR e capacitação), NR-09 (avaliação de agentes) e demais normas de SST aplicáveis, além do Certificado de Aprovação (CA) do órgão nacional competente.',
+   repMethodTitle:'Metodologia da Auditoria',
+   repMethod:'A auditoria seguiu três etapas: (i) verificação documental — fichas de EPI, relação de CAs, matriz de EPI por função e registros de treinamento; (ii) verificação em campo — adequação ao risco, estado de conservação, validade e uso correto dos EPIs no posto de trabalho; e (iii) orientação técnica e plano de ação — classificação das não conformidades por prioridade (Alta, Média, Baixa), com recomendação e evidência para cada item.',
+   info:'Auditoria de NR-06 (EPI) · 10 itens.'},
  assessoria:{short:'Assessoria', foco:'Assessoria mensal', icon:'📋', audit:false,
    docTitle:'Relatório de visita — Assessoria SST', seal:'VISITA',
    repTitle:'Relatório de Visita — Assessoria em SST', repKick:'RELATÓRIO DE VISITA · CONFIDENCIAL',
@@ -1297,17 +1380,21 @@ const TIPOS={
    repMethodTitle:'Metodologia da Visita', repMethod:'A visita seguiu três etapas: (i) verificação documental e de campo dos requisitos aplicáveis; (ii) análise de consistência entre a documentação, os registros e a realidade operacional; e (iii) orientação técnica e plano de ação — classificação das não conformidades por prioridade (Alta, Média, Baixa), com recomendação estruturada para cada item.'}
 };
 function tipoInfo(t){ return TIPOS[t]||TIPOS.assessoria; }
-function isAuditType(t){ return t==='nr07'||t==='nr05'; }
+function isAuditType(t){ return t==='nr07'||t==='nr05'||t==='nr06'; }
 function openClient(cid){
   const c=clientById(cid);
-  const jaAss=visitFor(cid,todayKey(),'assessoria'), jaAud=visitFor(cid,todayKey(),'nr07'), jaAud5=visitFor(cid,todayKey(),'nr05');
+  const jaAss=visitFor(cid,todayKey(),'assessoria'), jaAud=visitFor(cid,todayKey(),'nr07'), jaAud5=visitFor(cid,todayKey(),'nr05'), jaAud6=visitFor(cid,todayKey(),'nr06');
+  const schDia=agenda(cid).dia;
   const bg=el('div','sheet-bg'); const sh=el('div','sheet startsheet');
-  sh.innerHTML=`<h3>Iniciar <em>visita</em></h3><p class="hint">${esc(c.name)}</p>
+  sh.innerHTML=`<h3>Iniciar ou <em>agendar</em> visita</h3><p class="hint">${esc(c.name)}</p>
+    <button class="btn ghost agendar-btn" id="sv_agendar">🗓️ Agendar visita${schDia?` · <b>agendada p/ dia ${esc(String(schDia))}</b>`:''}</button>
+    <div class="ou">ou inicie agora</div>
     <div class="fld"><label>Tipo de visita</label>
       <select id="sv_tipo">
         <option value="assessoria">Assessoria mensal${jaAss?' (retomar)':''}</option>
         <option value="nr07">Assessoria NR-07 · PCMSO${jaAud?' (retomar)':''}</option>
         <option value="nr05">Auditoria NR-05 · CIPA${jaAud5?' (retomar)':''}</option>
+        <option value="nr06">Auditoria NR-06 · EPI${jaAud6?' (retomar)':''}</option>
       </select></div>
     <div class="fld" id="sv_tempo_wrap" style="display:none">
       <label>Duração prevista da visita</label>
@@ -1330,14 +1417,17 @@ function openClient(cid){
     tempoWrap.style.display=(t==='nr07')?'block':'none';
     if(t==='nr07') info.textContent=TIPOS.nr07.info;
     else if(t==='nr05') info.textContent=TIPOS.nr05.info;
+    else if(t==='nr06') info.textContent=TIPOS.nr06.info;
     else info.textContent='Checklist mensal do segmento '+(c.segment||'—')+', ajustado ao tempo contratado ('+(c.hours||'—')+'h) e ao foco do mês.';
   };
   tipoSel.onchange=upd; tempoSel.onchange=upd; upd();
+  $('#sv_agendar',sh).onclick=()=>{ bg.remove(); openAgendaSheet(c); };
   $('#sv_x',sh).onclick=()=>bg.remove();
   $('#sv_ok',sh).onclick=()=>{
     const tipo=tipoSel.value; bg.remove();
     if(tipo==='nr07') openVisit(cid,'nr07',Number(tempoSel.value));
     else if(tipo==='nr05') openVisit(cid,'nr05',null);
+    else if(tipo==='nr06') openVisit(cid,'nr06',null);
     else openVisit(cid,'assessoria',null);
   };
 }
@@ -1352,12 +1442,13 @@ async function openVisit(cid,tipo,tier){
   if(!v){
     const chk = tipo==='nr07' ? buildNR07(tier)
       : tipo==='nr05' ? buildNR05()
+      : tipo==='nr06' ? buildNR06()
       : buildChecklist(c).map(i=>({id:i.id,group:i.group,item:i.item,verify:i.verify,nr:i.nr,
           focus:!!i.focus,rank:i.rank||2,acao:'Regularizar — '+i.verify,prio:null}));
     v={id:'v'+Date.now(),clientId:cid,monthKey:mk,tipo:tipo,auditTier:(tipo==='nr07')?tier:null,
       tech:S.tech==='Gestão'?c.tech:S.tech,
       client:{name:c.name,segment:c.segment,hours:c.hours,tier:c.tier,locality:c.locality,sgg:c.sgg},
-      foco: tipo==='nr07' ? ('Assessoria NR-07 · '+tierLabelH(tier)) : tipo==='nr05' ? TIPOS.nr05.foco : curMonth().foco,
+      foco: tipo==='nr07' ? ('Assessoria NR-07 · '+tierLabelH(tier)) : tipo==='nr05' ? TIPOS.nr05.foco : tipo==='nr06' ? TIPOS.nr06.foco : curMonth().foco,
       mes: curMonth().mes, checkIn:null,checkOut:null,
       answers:{},notes:{},photoCount:0,signed:false, checklist:chk};
     DB.visits.push(v); await saveVisits();
@@ -1374,12 +1465,12 @@ function stats(v){
 }
 function idxColor(p){ return p>=90?'var(--ok)':p>=70?'var(--amber)':'var(--no)'; }
 function gaugeHTML(s){
-  const R=52, C0=2*Math.PI*R, pct=s.validos?s.conf/s.validos:0;
+  const R=57, C0=2*Math.PI*R, pct=s.validos?s.conf/s.validos:0;
   const col=s.validos?(s.pct>=90?'var(--ok)':s.pct>=70?'var(--amber)':'var(--no)'):'var(--faint)';
   return `<div class="gaugecard">
-    <div class="gauge"><svg width="120" height="120" viewBox="0 0 120 120">
-      <circle cx="60" cy="60" r="${R}" fill="none" stroke="var(--line-2)" stroke-width="12"/>
-      <circle cx="60" cy="60" r="${R}" fill="none" stroke="${col}" stroke-width="12" stroke-linecap="round"
+    <div class="gauge"><svg width="132" height="132" viewBox="0 0 132 132">
+      <circle cx="66" cy="66" r="${R}" fill="none" stroke="var(--line-2)" stroke-width="13"/>
+      <circle cx="66" cy="66" r="${R}" fill="none" stroke="${col}" stroke-width="13" stroke-linecap="round"
         stroke-dasharray="${C0.toFixed(1)}" stroke-dashoffset="${(C0*(1-pct)).toFixed(1)}"
         style="transition:stroke-dashoffset .6s ease,stroke .3s"/></svg>
       <div class="center"><span class="big" style="color:${col}">${s.validos?s.pct:'—'}<span class="u">${s.validos?'%':''}</span></span>
@@ -1470,7 +1561,9 @@ function buildExecPdf(jsPDFCtor, ctx, itens, LOGO){
   try{ const lw=34, lh=lw*152/413; doc.addImage(LOGO,'PNG', ML+4+(44-lw)/2, y+4+(19-lh)/2, lw, lh); }catch(e){}
   const tx=ML+54;
   F(7.5,'bold'); setT(LG); doc.text(ctx.repKick||'RELATÓRIO DE ASSESSORIA EM SST · CONFIDENCIAL', tx, y+7);
-  F(15,'bold'); setT(WH); doc.text(ctx.repTitle||'Assessoria em SST — Foco NR-07 (PCMSO)', tx, y+14);
+  setT(WH); doc.setFont('helvetica','bold'); var _tt=ctx.repTitle||'Assessoria em SST — Foco NR-07 (PCMSO)', _ts=15, _mw=(PW-MR)-tx-2;
+  doc.setFontSize(_ts); while(_ts>10.5 && doc.getTextWidth(_tt)>_mw){ _ts-=0.5; doc.setFontSize(_ts); }
+  doc.text(_tt, tx, y+14);
   F(8); setT(LG);
   doc.splitTextToSize(ctx.repSub||'Visita de assessoria em Segurança e Saúde no Trabalho · Brantech Engenharia de Segurança do Trabalho', CW-58).forEach((ln,i)=>doc.text(ln, tx, y+19.5+i*4));
   y+=27;
@@ -1572,7 +1665,7 @@ function buildExecPdf(jsPDFCtor, ctx, itens, LOGO){
       bodyLines=[['meta',doc.splitTextToSize(meta, CW-8)],['acao',doc.splitTextToSize(acao, CW-8)]];
       if(it.note) bodyLines.push(['obs',doc.splitTextToSize('Observação do técnico: '+it.note, CW-8)]);
     } else {
-      const msg={C:'Conforme — requisito atendido; sem ação necessária nesta visita.',A:'Não aplicável ao escopo/realidade da organização.',P:'Item não avaliado nesta visita.'}[resp];
+      const msg={C:'Recomendação de manutenção: '+(it.manter||'Manter a conformidade e o acompanhamento contínuo nas próximas visitas.'),A:'Não aplicável ao escopo/realidade da organização.',P:'Item não avaliado nesta visita.'}[resp];
       bodyLines=[['ok',doc.splitTextToSize(msg, CW-8)]];
     }
     // altura (mesma progressão do desenho)
@@ -1645,7 +1738,7 @@ function gerarPdfVisita(v){
   const s=stats(v);
   const itens=v.checklist.map(it=>({ bloco:it.group||it.bloco||'—', verify:it.verify||it.item, item:it.item,
     nr:it.nr, prioridade:it.prio||it.prioridade||'Média', risco:it.risco||'', passos:it.passos||null,
-    acao:it.acao||'', resp:(v.answers[it.id]||'P'), note:v.notes[it.id]||'' }));
+    acao:it.acao||'', manter:it.manter||'', resp:(v.answers[it.id]||'P'), note:v.notes[it.id]||'' }));
   const sig=S.media&&S.media.signature;
   const th=tipoInfo(v.tipo);
   const ctx={ cliente:v.client.name, sgg:v.client.sgg||'—', tecnico:v.tech, competencia:v.mes,
@@ -1695,7 +1788,7 @@ function execReportNode(v){
         `<div class="ex-acao"><b>Ação Recomendada:</b> <span class="ex-como">COMO DESENVOLVER A AÇÃO:</span> ${passos}</div>`+
         (it.note?`<div class="ex-obs">Observação do técnico: ${esc(it.note)}</div>`:'')+`</div>`;
     }
-    const msg={C:'Requisito atendido; sem ação necessária nesta visita.',A:'Não aplicável ao escopo/realidade da organização.',P:'Item não avaliado nesta visita.'}[it.a];
+    const msg={C:'Recomendação de manutenção: '+(it.manter||'Manter a conformidade e o acompanhamento contínuo nas próximas visitas.'),A:'Não aplicável ao escopo/realidade da organização.',P:'Item não avaliado nesta visita.'}[it.a];
     return `<div class="ex-pi ${cls}">${head}<div class="ex-ok">${esc(msg)}</div></div>`;
   }).join('');
 
@@ -1921,19 +2014,31 @@ function tabRelatorio(w,c,v){
   w.appendChild(node);
   const acts=el('div','stack noprint'); acts.style.marginTop='14px';
   const p0=el('button','btn green','📄 Gerar relatório executivo (PDF)'); p0.onclick=()=>gerarPdfVisita(v);
-  const p2=el('button','btn ghost sm','📤 Enviar ao cliente'); p2.onclick=()=>shareDoc(v,pct,ans,nf);
+  const p2=el('button','btn ghost sm','📤 Enviar ao cliente'); p2.onclick=()=>openEnviarCliente(v,pct,ans,nf);
   acts.appendChild(p0); acts.appendChild(p2); w.appendChild(acts);
 }
 
 function ckCard(it){
   const v=S.visit; const cur=v.answers[it.id]||'';
   const ck=el('div','ck'+(cur==='N'?' nc show-note':cur==='C'?' ok':''));
-  ck.innerHTML=`<div class="q">${esc(it.item)}</div><div class="v">${esc(it.verify)}</div><div class="nr">${esc(it.nr)}</div>
+  const n=v.checklist.findIndex(x=>x.id===it.id)+1;
+  const pr=(it.prio||'').toLowerCase();
+  const prCls=pr.indexOf('alta')>=0?'alta':(pr.indexOf('méd')>=0||pr.indexOf('med')>=0)?'media':(pr?'baixa':'');
+  const _passos=(it.passos&&it.passos.length)?it.passos.map((p,k)=>(k+1)+'. '+esc(p)).join('; ')+'.':'';
+  const guia=(it.risco||_passos||it.evidencia)?`<details class="guia">
+      <summary>Orientação técnica</summary>
+      ${it.risco?`<div class="gl"><b>Risco potencial:</b> ${esc(it.risco)}</div>`:''}
+      ${_passos?`<div class="gl"><b>Como desenvolver a ação:</b> ${_passos}</div>`:''}
+      ${it.evidencia?`<div class="gl ev"><b>Evidência recomendada:</b> ${esc(it.evidencia)}</div>`:''}
+    </details>`:'';
+  ck.innerHTML=`<div class="ckhead"><span class="cknum">Item ${String(n).padStart(2,'0')}</span>${it.prio?`<span class="ckprio ${prCls}">Prioridade: ${esc(it.prio)}</span>`:''}</div>
+    <div class="v">${esc(it.verify)}</div><div class="nr">${esc(it.nr)}</div>
     <div class="opts">
-      <div class="opt c ${cur==='C'?'on':''}" data-a="C">Conforme</div>
-      <div class="opt n ${cur==='N'?'on':''}" data-a="N">Não conf.</div>
-      <div class="opt a ${cur==='A'?'on':''}" data-a="A">N/A</div>
+      <div class="opt c ${cur==='C'?'on':''}" data-a="C"><span class="bx"></span>Conforme</div>
+      <div class="opt n ${cur==='N'?'on':''}" data-a="N"><span class="bx"></span>Não Conforme</div>
+      <div class="opt a ${cur==='A'?'on':''}" data-a="A"><span class="bx"></span>N/A</div>
     </div>
+    ${guia}
     <textarea placeholder="Observação / o que corrigir…">${esc(v.notes[it.id]||'')}</textarea>
     <div class="photobar">
       <label class="addphoto">📷 Anexar foto<input type="file" accept="image/*" capture="environment" multiple></label>
@@ -2478,10 +2583,51 @@ function vDoc(){
   w.appendChild(node);
   const acts=el('div','stack noprint'); acts.style.marginTop='14px';
   const p1=el('button','btn green','📄 Gerar relatório executivo (PDF)'); p1.onclick=()=>gerarPdfVisita(v);
-  const p2=el('button','btn ghost sm','📤 Enviar ao cliente'); p2.onclick=()=>shareDoc(v,pct,ans,nf);
+  const p2=el('button','btn ghost sm','📤 Enviar ao cliente'); p2.onclick=()=>openEnviarCliente(v,pct,ans,nf);
   const p3=el('button','btn ghost sm','← Voltar'); p3.onclick=()=>go(S.tech==='Gestão'?'admin':'client',{vtab:'relatorio',panel:null});
   acts.appendChild(p1); acts.appendChild(p2); acts.appendChild(p3);
   w.appendChild(acts); $('#view').appendChild(w);
+}
+function waDigits(tel){ let d=(tel||'').replace(/\D/g,''); if(!d) return ''; if(d.length<=11 && d.slice(0,2)!=='55') d='55'+d; return d; }
+function enviarMsg(v,pct,ans,nf){
+  const sig=S.media&&S.media.signature;
+  return 'Olá! Segue o resultado da visita de SST realizada pela Brantech.\n\n'
+    +'Cliente: '+v.client.name+'\n'
+    +'Escopo: '+(v.foco||'')+'\n'
+    +'Data: '+(fmtTS(v.checkOut&&v.checkOut.ts)||fmtTS(v.checkIn&&v.checkIn.ts))+'\n'
+    +'Índice de conformidade: '+pct+'% ('+ans.length+' itens)\n'
+    +(sig&&!sig.absent?('Assinado por: '+sig.name+(sig.role?' — '+sig.role:'')+'\n'):'')
+    +'\nO relatório executivo em PDF segue em anexo.\n\nBrantech — Engenharia de Segurança do Trabalho';
+}
+function openEnviarCliente(v,pct,ans,nf){
+  const d=cdata(v.clientId); const email=(d.contato.email||'').trim(); const tel=(d.contato.tel||'').trim();
+  const wa=waDigits(tel); const msg=enviarMsg(v,pct,ans,nf);
+  const subject='Relatório de visita SST — '+v.client.name+' — '+(v.mes||'');
+  const bg=el('div','sheet-bg'); const sh=el('div','sheet startsheet');
+  sh.innerHTML=`<h3>Enviar ao <em>cliente</em></h3><p class="hint">${esc(v.client.name)}</p>
+    <div class="envrow"><span class="k">📧 E-mail</span><span class="v ${email?'':'na'}">${esc(email||'não cadastrado')}</span></div>
+    <div class="envrow"><span class="k">💬 WhatsApp</span><span class="v ${wa?'':'na'}">${esc(tel||'não cadastrado')}</span></div>
+    <div class="envnote">Ao enviar, <b>anexe o PDF</b> que você gerou. O envio automático do anexo virá com a etapa de servidor.</div>
+    <div class="stack">
+      <button class="btn green" id="env_both" ${(email&&wa)?'':'disabled'}>📧 + 💬 Enviar pelos dois</button>
+      <button class="btn" id="env_mail" ${email?'':'disabled'}>📧 Enviar por e-mail</button>
+      <button class="btn" id="env_wa" ${wa?'':'disabled'}>💬 Enviar por WhatsApp</button>
+      ${(!email||!wa)?`<button class="btn ghost sm" id="env_edit">✎ Cadastrar contato do cliente</button>`:''}
+      <button class="btn ghost sm" id="env_share">↗ Compartilhar de outra forma</button>
+      <button class="btn ghost sm" id="env_x">Fechar</button>
+    </div>`;
+  bg.appendChild(sh); document.body.appendChild(bg);
+  bg.onclick=e=>{ if(e.target===bg) bg.remove(); };
+  const sendMail=()=>{ const a=document.createElement('a'); a.href='mailto:'+email+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(msg); a.target='_blank'; document.body.appendChild(a); a.click(); a.remove(); };
+  const sendWa=()=>{ window.open('https://wa.me/'+wa+'?text='+encodeURIComponent(msg),'_blank'); };
+  const done=(canal)=>{ logMat(v.clientId,'Relatório','Relatório enviado ('+canal+') — '+(v.mes||''),'Enviado'); toast('Envio por '+canal+' iniciado. Não esqueça de anexar o PDF.'); bg.remove(); };
+  const B=id=>$('#'+id,sh);
+  if(B('env_mail')&&email) B('env_mail').onclick=()=>{ sendMail(); done('e-mail'); };
+  if(B('env_wa')&&wa) B('env_wa').onclick=()=>{ sendWa(); done('WhatsApp'); };
+  if(B('env_both')&&email&&wa) B('env_both').onclick=()=>{ sendWa(); setTimeout(sendMail,500); done('e-mail e WhatsApp'); };
+  if(B('env_edit')) B('env_edit').onclick=()=>{ bg.remove(); openFichaSheet(v.client); };
+  B('env_share').onclick=()=>{ bg.remove(); shareDoc(v,pct,ans,nf); };
+  B('env_x').onclick=()=>bg.remove();
 }
 async function shareDoc(v,pct,ans,nf){
   const sig=S.media&&S.media.signature;
