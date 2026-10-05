@@ -2710,6 +2710,15 @@ function openClientAdmin(cid){
   const segOpts=SEGOPTS.map(([k,disp])=>`<option value="${k}" ${c.segKey===k?'selected':''}>${disp}</option>`).join('');
   const techOpts=SEED.technicians.map(t=>`<option value="${esc(t)}" ${c.tech===t?'selected':''}>${esc(t)}</option>`).join('');
   const editado = !novo && DB.clientEdit[c.id];
+  const feitas = novo ? [] : DB.visits.filter(v=>v.clientId===cid && v.checkOut).sort((a,b)=>((b.checkOut&&b.checkOut.ts)||'').localeCompare((a.checkOut&&a.checkOut.ts)||''));
+  const realHTML = feitas.length?('<div class="ou">visitas realizadas</div><div class="realiz">'+feitas.map((v,i)=>{
+    const tema=isAuditType(v.tipo)?tipoInfo(v.tipo).short:'Assessoria mensal';
+    const d=(fmtTS(v.checkOut.ts)||'').split(' ')[0];
+    const nc=Object.values(v.answers||{}).filter(a=>a==='N').length;
+    return '<button class="realrow" data-i="'+i+'"><span class="rr-main"><span class="rr-t">'+esc(tema)+'</span>'+
+      '<span class="rr-d">'+esc(v.mes||'')+(d?' · '+esc(d):'')+(v.tech?' · '+esc(v.tech):'')+(nc?' · '+nc+' NC':'')+'</span></span>'+
+      '<span class="rr-go">ver relatório \u203a</span></button>';
+  }).join('')+'</div>'):'';
   sh.innerHTML=`<h3>${novo?'Novo <em>cliente</em>':'Gerir <em>cliente</em>'}</h3>
     ${novo?'':`<p class="hint">${esc(c.name)}</p>`}
     ${novo?`<div class="fld"><label>Empresa</label><input id="ca_name" type="text" placeholder="Razão social / nome"></div>`:''}
@@ -2730,12 +2739,13 @@ function openClientAdmin(cid){
       <button class="btn green" id="ca_ok">${novo?'Adicionar cliente':'Salvar alterações'}</button>
       ${editado?`<button class="btn ghost sm" id="ca_reset">Restaurar cadastro original</button>`:''}
       <button class="btn ghost sm" id="ca_x">Cancelar</button>
-    </div>`;
+    </div>${realHTML}`;
   bg.appendChild(sh); document.body.appendChild(bg);
   bg.onclick=e=>{ if(e.target===bg) bg.remove(); };
   const hoursInp=$('#ca_hours',sh);
   hoursInp.oninput=()=>{ $('#ca_tier',sh).textContent='Faixa: '+tierFromHours(hoursInp.value); };
   $('#ca_x',sh).onclick=()=>bg.remove();
+  $$('.realrow',sh).forEach(b=>{ b.onclick=async()=>{ const v=feitas[Number(b.dataset.i)]; bg.remove(); try{ await loadMedia(v.id); }catch(e){} go('doc',{visit:v,clientId:cid}); }; });
   if($('#ca_reset',sh)) $('#ca_reset',sh).onclick=async()=>{ await resetClientEdit(c.id); bg.remove(); toast('Cadastro restaurado.'); go('admin'); };
   $('#ca_ok',sh).onclick=async()=>{
     const tech=$('#ca_tech',sh).value, hours=Number($('#ca_hours',sh).value)||0;
