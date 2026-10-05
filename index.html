@@ -1759,16 +1759,19 @@ function gerarPdfVisita(v){
     sig: sig?{name:sig.name,role:sig.role,ts:fmtTS(sig.ts),img:sig.img,absent:sig.absent}:null };
   const Ctor=(window.jspdf&&window.jspdf.jsPDF)||window.jsPDF;
   const doc=buildExecPdf(Ctor, ctx, itens, LOGO);
-  const nome='Relatorio_Assessoria_NR07_'+(v.client.name||'cliente').replace(/[^A-Za-z0-9]+/g,'_').slice(0,40)+'.pdf';
-  try{
-    const blob=doc.output('blob');
-    const url=URL.createObjectURL(blob);
-    // abre o PDF (aba nova); se bloqueado, força download
-    const w=window.open(url,'_blank');
-    if(!w){ const a=document.createElement('a'); a.href=url; a.download=nome; document.body.appendChild(a); a.click(); a.remove(); }
-    setTimeout(()=>URL.revokeObjectURL(url), 60000);
-    toast('Relatório em PDF gerado.');
-  }catch(e){ try{ doc.save(nome); }catch(e2){ toast('Não foi possível gerar o PDF neste navegador.'); } }
+  // nome do arquivo automático: Tipo_Cliente_Data.pdf
+  const tagMap={nr07:'Assessoria_NR-07_PCMSO', nr05:'Auditoria_NR-05_CIPA', nr06:'Auditoria_NR-06_EPI', assessoria:'Relatorio_Visita_SST'};
+  const slugCli=(v.client.name||'cliente').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^A-Za-z0-9]+/g,'_').replace(/^_+|_+$/g,'').slice(0,50)||'cliente';
+  const _ts=(v.checkOut&&v.checkOut.ts)||(v.checkIn&&v.checkIn.ts); let _dt=_ts?new Date(_ts):new Date(); if(isNaN(_dt.getTime())) _dt=new Date();
+  const dataCli=_dt.getFullYear()+'-'+String(_dt.getMonth()+1).padStart(2,'0')+'-'+String(_dt.getDate()).padStart(2,'0');
+  const nome=(tagMap[v.tipo]||'Relatorio_Visita')+'_'+slugCli+'_'+dataCli+'.pdf';
+  try{ if(doc.setProperties) doc.setProperties({title:nome.replace(/\.pdf$/,'').replace(/_/g,' '), author:'Brantech', subject:(th&&th.repTitle)||'Relatório de visita SST'}); }catch(e){}
+  try{ doc.save(nome); toast('PDF gerado: '+nome); }
+  catch(e){
+    try{ const blob=doc.output('blob'); const url=URL.createObjectURL(blob);
+      const a=document.createElement('a'); a.href=url; a.download=nome; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(()=>URL.revokeObjectURL(url),60000); toast('PDF gerado: '+nome);
+    }catch(e2){ toast('Não foi possível gerar o PDF neste navegador.'); } }
 }
 
 function execReportNode(v){
