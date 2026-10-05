@@ -1095,9 +1095,10 @@ function fichaCompleta(cid){
 /* ---- agenda ---- */
 function agenda(cid){ return DB.schedule[cid]||{dia:'',obs:''}; }
 function agendaStatus(cid){
-  const mk=todayKey(), v=visitFor(cid,mk), sch=agenda(cid);
-  if(v&&v.checkOut) return {k:'done',label:'Realizada',pill:'done'};
-  if(v&&v.checkIn) return {k:'prog',label:'Em andamento',pill:'prog'};
+  const mk=todayKey(), sch=agenda(cid);
+  const vs=DB.visits.filter(x=>x.clientId===cid && x.monthKey===mk);
+  if(vs.some(x=>x.checkOut)) return {k:'done',label:'Realizada',pill:'done'};
+  if(vs.some(x=>x.checkIn)) return {k:'prog',label:'Em andamento',pill:'prog'};
   if(!sch.dia) return {k:'sem',label:'Sem agenda',pill:'ghost'};
   const h=new Date(); const hoje=new Date(h.getFullYear(),h.getMonth(),h.getDate());
   const alvo=new Date(h.getFullYear(),h.getMonth(),Number(sch.dia));
@@ -1249,7 +1250,7 @@ function vLogin(){
 function vDash(){
   const w=el('div','wrap'); const mk=todayKey(), m=curMonth();
   const list=clientsOf(S.tech);
-  const done=list.filter(c=>{const v=visitFor(c.id,mk); return v&&v.checkOut;}).length;
+  const done=list.filter(c=>DB.visits.some(v=>v.clientId===c.id && v.monthKey===mk && v.checkOut)).length;
   const late=list.filter(c=>agendaStatus(c.id).k==='late').length;
 
   w.appendChild(el('p','eyebrow',`${m.mes} · foco ${esc(m.foco)}`));
@@ -2026,7 +2027,11 @@ function tabRelatorio(w,c,v){
   const acts=el('div','stack noprint'); acts.style.marginTop='14px';
   const p0=el('button','btn green','📄 Gerar relatório executivo (PDF)'); p0.onclick=()=>gerarPdfVisita(v);
   const p2=el('button','btn ghost sm','📤 Enviar ao cliente'); p2.onclick=()=>openEnviarCliente(v,pct,ans,nf);
-  acts.appendChild(p0); acts.appendChild(p2); w.appendChild(acts);
+  const p9=el('button','btn','✓ Concluir visita'); p9.onclick=async()=>{
+    v.concluded=true; try{ await saveVisits(); }catch(e){}
+    toast('Visita concluída e registrada no histórico.'); go('dash');
+  };
+  acts.appendChild(p0); acts.appendChild(p2); acts.appendChild(p9); w.appendChild(acts);
 }
 
 function ckCard(it){
@@ -2742,7 +2747,7 @@ function vAdmin(){
   w.appendChild(el('p','sub',`${m.mes} · foco <b>${esc(m.foco)}</b> · ${allClients(true).length} clientes na carteira`));
 
   const res=allClients(true).filter(matchFilters);
-  const doneM=res.filter(c=>{const v=visitFor(c.id,mk); return v&&v.checkOut;}).length;
+  const doneM=res.filter(c=>DB.visits.some(v=>v.clientId===c.id && v.monthKey===mk && v.checkOut)).length;
   const lateM=res.filter(c=>agendaStatus(c.id).k==='late').length;
   const ncs=DB.visits.filter(v=>v.monthKey===mk&&res.some(c=>c.id===v.clientId))
     .reduce((a,v)=>a+Object.values(v.answers||{}).filter(x=>x==='N').length,0);
