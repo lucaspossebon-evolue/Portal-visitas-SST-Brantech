@@ -1,0 +1,16 @@
+{
+  "name": "Portal SST — Brantech",
+  "short_name": "Portal SST",
+  "description": "Portal de Visitas e Auditorias SST — Brantech",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0B3B34",
+  "theme_color": "#0B3B34",
+  "icons": [
+    { "src": "icone-portal-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icone-portal-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icone-portal-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

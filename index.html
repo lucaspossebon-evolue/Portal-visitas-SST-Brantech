@@ -2,8 +2,16 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
 <meta name="color-scheme" content="light">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0B3B34">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icone-portal-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Portal SST">
 <title>Brantech · Portal de Visitas SST</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,10 +40,10 @@
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   h1.title,.vhead .vh1,.kpi .n,.stamp .ts,.seal,.idxchip .val{font-family:var(--disp)}
   html,body{margin:0;padding:0}
-  body{font-family:var(--sans);background:var(--paper);color:var(--ink);font-size:15px;line-height:1.45;padding-bottom:44px;overflow-x:hidden}
+  body{font-family:var(--sans);background:var(--paper);color:var(--ink);font-size:15px;line-height:1.45;padding-bottom:calc(44px + env(safe-area-inset-bottom));overflow-x:hidden}
   .app{max-width:560px;margin:0 auto;min-height:100vh}
   .bar{position:sticky;top:0;z-index:30;background:var(--deep);display:flex;align-items:center;gap:10px;
-    padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.08)}
+    padding:calc(10px + env(safe-area-inset-top)) 14px 10px;border-bottom:1px solid rgba(255,255,255,.08)}
   .bar .chip{background:#fff;border-radius:7px;padding:5px 8px;display:flex;align-items:center}
   .bar .chip img{height:22px;display:block}
   .bar .tag{color:#fff;font-size:10px;letter-spacing:1.4px;text-transform:uppercase;font-weight:700;
@@ -329,7 +337,7 @@
   .vhead .vh2{font-size:12px;color:var(--muted);margin-top:2px}
   .vbody{padding:0 16px}
   .bnav{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:100%;max-width:560px;background:#fff;
-    border-top:1px solid var(--line);display:flex;z-index:25;box-shadow:0 -2px 12px rgba(6,48,26,.07)}
+    border-top:1px solid var(--line);display:flex;z-index:25;box-shadow:0 -2px 12px rgba(6,48,26,.07);padding-bottom:env(safe-area-inset-bottom)}
   .bni{flex:1;border:none;background:none;padding:9px 3px 9px;font-family:inherit;cursor:pointer;display:flex;
     flex-direction:column;align-items:center;gap:2px;color:var(--muted);font-size:10.5px;font-weight:700}
   .bni .bi{font-size:18px;line-height:1}
@@ -2842,5 +2850,6 @@ function exportCSV(res){
   render();
 })();
 </script>
+<script>if("serviceWorker" in navigator){addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){});});}</script>
 </body>
 </html>
