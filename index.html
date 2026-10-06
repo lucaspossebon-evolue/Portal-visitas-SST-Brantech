@@ -578,6 +578,25 @@
     border-radius:11px;padding:11px 14px;font-weight:700;font-size:14px;color:var(--ink);cursor:pointer;font-family:inherit;margin-bottom:10px}
   .filters-toggle .fbadge{background:var(--brand);color:#fff;border-radius:20px;padding:1px 9px;font-size:12px;font-weight:800}
   .filters-toggle .fchev{margin-left:auto;color:var(--muted);font-size:12px}
+  .tipolist{max-height:300px;overflow-y:auto;border:1.5px solid var(--line);border-radius:11px;margin-top:8px;padding:5px;-webkit-overflow-scrolling:touch}
+  .tipolist .tgrp{font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding:10px 10px 5px}
+  .tipolist .trow{display:flex;align-items:center;gap:11px;padding:11px 10px;border-radius:9px;cursor:pointer}
+  .tipolist .trow.on{background:var(--soft);box-shadow:inset 0 0 0 1.5px var(--brand)}
+  .tipolist .trow .tic{font-size:18px;width:24px;text-align:center}
+  .tipolist .trow .tlb{font-size:14px;font-weight:600;color:var(--ink);line-height:1.25}
+  .tipolist .trow .tje{font-size:9.5px;font-weight:800;color:var(--amber);background:#FDF3E7;border-radius:12px;padding:1px 7px;margin-left:4px;vertical-align:1px}
+  .tipolist .empty{padding:16px;text-align:center;color:var(--muted);font-size:13px}
+  .combo{position:relative}
+  .comboinput{padding-right:34px}
+  .combo .chev{position:absolute;right:13px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:12px;pointer-events:none}
+  .combolist{border:1.5px solid var(--line);border-radius:11px;margin-top:6px;padding:5px;max-height:300px;overflow-y:auto;background:#fff;box-shadow:0 10px 28px rgba(6,48,26,.14);-webkit-overflow-scrolling:touch}
+  .combolist .tgrp{font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding:9px 10px 4px}
+  .combolist .trow{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 11px;border-radius:8px;cursor:pointer;font-size:14px;color:var(--ink)}
+  .combolist .trow .tlb{font-weight:600}
+  .combolist .trow.on{background:var(--soft);box-shadow:inset 0 0 0 1.5px var(--brand)}
+  .combolist .trow .tje{font-size:9.5px;font-weight:800;color:var(--amber);background:#FDF3E7;border-radius:12px;padding:1px 7px;white-space:nowrap}
+  .combolist .empty{padding:16px;text-align:center;color:var(--muted);font-size:13px}
+  .btn.cancelvisita{margin-top:16px;color:var(--no);border:1px solid var(--line)}
   @media (min-width:820px){
     body{background:#D8E3DE}
     .app{max-width:1080px;background:var(--card);box-shadow:0 10px 44px rgba(6,48,26,.16);min-height:100vh}
@@ -1533,6 +1552,19 @@ const TIPOS={
 };
 function tipoInfo(t){ return TIPOS[t]||TIPOS.assessoria; }
 function isAuditType(t){ return t==='nr07'||t==='nr05'||t==='nr06'||t==='acomp'||t==='pgr'||t==='psico'||t==='inc'||t==='ergo'||t==='nr12'||t==='nr35'||t==='nr10'||t==='nr24'||t==='treino'; }
+const TIPO_GRUPOS=[
+  ['Assessoria e acompanhamento',['assessoria','acomp']],
+  ['Saúde e gestão de riscos',['pgr','nr07','psico','ergo']],
+  ['Segurança operacional',['nr06','nr12','nr10','nr35','inc']],
+  ['Pessoas, ambiente e capacitação',['nr05','nr24','treino']],
+];
+const TIPO_KW={assessoria:'mensal segmento rotina', acomp:'acompanhamento mensal fluxos admissao demissao esocial',
+ pgr:'pgr gro gestao de riscos inventario nr-01 nr01', nr07:'pcmso exames medicos aso saude ocupacional nr-07 nr07',
+ psico:'psicossociais saude mental assedio violencia nr-01', ergo:'ergonomia postura ler dort nr-17 nr17',
+ nr06:'epi equipamento protecao ca ficha nr-06 nr06', nr12:'maquinas equipamentos protecao loto nr-12 nr12',
+ nr10:'eletricidade eletrico choque prontuario nr-10 nr10', nr35:'altura queda ancoragem nr-35 nr35',
+ inc:'incendio fogo extintor brigada avcb nr-23 nr23 emergencia', nr05:'cipa cipatr assedio ata nr-05 nr05',
+ nr24:'sanitarias conforto banheiro vestiario refeitorio agua nr-24 nr24', treino:'treinamentos capacitacoes matriz reciclagem integracao'};
 function openClient(cid){
   const c=clientById(cid);
   const jaAss=visitFor(cid,todayKey(),'assessoria'), jaAud=visitFor(cid,todayKey(),'nr07'), jaAud5=visitFor(cid,todayKey(),'nr05'), jaAud6=visitFor(cid,todayKey(),'nr06'), jaAudA=visitFor(cid,todayKey(),'acomp'), jaAu_pgr=visitFor(cid,todayKey(),'pgr'), jaAu_psico=visitFor(cid,todayKey(),'psico'), jaAu_inc=visitFor(cid,todayKey(),'inc'), jaAu_ergo=visitFor(cid,todayKey(),'ergo'), jaAu_nr12=visitFor(cid,todayKey(),'nr12'), jaAu_nr35=visitFor(cid,todayKey(),'nr35'), jaAu_nr10=visitFor(cid,todayKey(),'nr10'), jaAu_nr24=visitFor(cid,todayKey(),'nr24'), jaAu_treino=visitFor(cid,todayKey(),'treino');
@@ -1550,23 +1582,9 @@ function openClient(cid){
   sh.innerHTML=`<h3>Iniciar ou <em>agendar</em> visita</h3><p class="hint">${esc(c.name)}</p>
     <button class="btn ghost agendar-btn" id="sv_agendar">🗓️ Agendar visita${schDia?` · <b>agendada p/ dia ${esc(String(schDia))}</b>`:''}</button>
     <div class="ou">ou inicie agora</div>
-    <div class="fld"><label>Tipo de visita</label>
-      <select id="sv_tipo">
-        <option value="assessoria">Assessoria mensal${jaAss?' (retomar)':''}</option>
-        <option value="nr07">Assessoria NR-07 · PCMSO${jaAud?' (retomar)':''}</option>
-        <option value="nr05">Auditoria NR-05 · CIPA${jaAud5?' (retomar)':''}</option>
-        <option value="nr06">Auditoria NR-06 · EPI${jaAud6?' (retomar)':''}</option>
-        <option value="acomp">Auditoria de Acompanhamento Mensal${jaAudA?' (retomar)':''}</option>
-        <option value="pgr">Auditoria NR-01 · PGR/GRO${jaAu_pgr?' (retomar)':''}</option>
-        <option value="psico">Auditoria NR-01 · Riscos Psicossociais${jaAu_psico?' (retomar)':''}</option>
-        <option value="inc">Auditoria NR-23 · Incêndio${jaAu_inc?' (retomar)':''}</option>
-        <option value="ergo">Auditoria NR-17 · Ergonomia${jaAu_ergo?' (retomar)':''}</option>
-        <option value="nr12">Auditoria NR-12 · Máquinas${jaAu_nr12?' (retomar)':''}</option>
-        <option value="nr35">Auditoria NR-35 · Trabalho em Altura${jaAu_nr35?' (retomar)':''}</option>
-        <option value="nr10">Auditoria NR-10 · Eletricidade${jaAu_nr10?' (retomar)':''}</option>
-        <option value="nr24">Auditoria NR-24 · Cond. Sanitárias${jaAu_nr24?' (retomar)':''}</option>
-        <option value="treino">Auditoria · Matriz de Treinamentos${jaAu_treino?' (retomar)':''}</option>
-      </select></div>
+    <div class="fld"><label>Tipo de visita / auditoria</label>
+      <div class="combo"><input id="sv_busca" class="search comboinput" placeholder="Selecionar ou digitar para filtrar (ex.: NR-06, incêndio, CIPA)…" autocomplete="off"><span class="chev">&#9662;</span>
+      <div id="sv_tipolist" class="combolist" style="display:none"></div></div></div>
     <div class="fld" id="sv_tempo_wrap" style="display:none">
       <label>Duração prevista da visita</label>
       <select id="sv_tempo">
@@ -1582,9 +1600,27 @@ function openClient(cid){
     </div>${realHTML}`;
   bg.appendChild(sh); document.body.appendChild(bg);
   bg.onclick=e=>{ if(e.target===bg) bg.remove(); };
-  const tipoSel=$('#sv_tipo',sh), tempoWrap=$('#sv_tempo_wrap',sh), tempoSel=$('#sv_tempo',sh), info=$('#sv_info',sh);
+  const tempoWrap=$('#sv_tempo_wrap',sh), tempoSel=$('#sv_tempo',sh), info=$('#sv_info',sh), sb=$('#sv_busca',sh), list=$('#sv_tipolist',sh);
+  let selTipo='assessoria';
+  const jaMap={assessoria:jaAss, nr07:jaAud, nr05:jaAud5, nr06:jaAud6, acomp:jaAudA, pgr:jaAu_pgr, psico:jaAu_psico, inc:jaAu_inc, ergo:jaAu_ergo, nr12:jaAu_nr12, nr35:jaAu_nr35, nr10:jaAu_nr10, nr24:jaAu_nr24, treino:jaAu_treino};
+  const labOf=k=> k==='assessoria' ? 'Assessoria mensal' : (TIPOS[k]&&(TIPOS[k].menu||TIPOS[k].short))||k;
+  function renderTipos(q){
+    q=norm(q||''); list.innerHTML=''; let any=false;
+    TIPO_GRUPOS.forEach(([gname,keys])=>{
+      const vis=keys.filter(k=>{ const hay=norm(labOf(k)+' '+(TIPO_KW[k]||'')); return !q || hay.includes(q); });
+      if(!vis.length) return;
+      list.appendChild(el('div','tgrp',gname));
+      vis.forEach(k=>{
+        const row=el('div','trow'+(selTipo===k?' on':''),'<span class="tlb">'+esc(labOf(k))+'</span>'+(jaMap[k]?'<span class="tje">retomar</span>':''));
+        row.onmousedown=e=>e.preventDefault();
+        row.onclick=()=>{ selTipo=k; sb.value=labOf(k); closeList(); upd(); };
+        list.appendChild(row); any=true;
+      });
+    });
+    if(!any) list.appendChild(el('div','empty','Nenhuma auditoria encontrada.'));
+  }
   const upd=()=>{
-    const t=tipoSel.value;
+    const t=selTipo;
     tempoWrap.style.display=(t==='nr07')?'block':'none';
     if(t==='nr07') info.textContent=TIPOS.nr07.info;
     else if(t==='nr05') info.textContent=TIPOS.nr05.info;
@@ -1601,12 +1637,17 @@ function openClient(cid){
     else if(t==='treino') info.textContent=TIPOS.treino.info;
     else info.textContent='Checklist mensal do segmento '+(c.segment||'—')+', ajustado ao tempo contratado ('+(c.hours||'—')+'h) e ao foco do mês.';
   };
-  tipoSel.onchange=upd; tempoSel.onchange=upd; upd();
+  const openList=()=>{ list.style.display='block'; }, closeList=()=>{ list.style.display='none'; };
+  sb.value=labOf(selTipo);
+  sb.onfocus=()=>{ sb.select(); renderTipos(''); openList(); };
+  sb.oninput=()=>{ openList(); renderTipos(sb.value); };
+  sb.onblur=()=>{ setTimeout(()=>{ if(list.style.display==='none') return; closeList(); sb.value=labOf(selTipo); }, 180); };
+  tempoSel.onchange=upd; renderTipos(''); upd();
   $('#sv_agendar',sh).onclick=()=>{ bg.remove(); openAgendaSheet(c); };
   $$('.realrow',sh).forEach(b=>{ b.onclick=async()=>{ const v=feitas[Number(b.dataset.i)]; bg.remove(); try{ await loadMedia(v.id); }catch(e){} go('doc',{visit:v,clientId:cid}); }; });
   $('#sv_x',sh).onclick=()=>bg.remove();
   $('#sv_ok',sh).onclick=()=>{
-    const tipo=tipoSel.value; bg.remove();
+    const tipo=selTipo; bg.remove();
     if(tipo==='nr07') openVisit(cid,'nr07',Number(tempoSel.value));
     else if(tipo==='nr05') openVisit(cid,'nr05',null);
     else if(tipo==='nr06') openVisit(cid,'nr06',null);
@@ -1653,7 +1694,6 @@ async function openVisit(cid,tipo,tier){
       foco: tipo==='nr07' ? ('Assessoria NR-07 · '+tierLabelH(tier)) : tipo==='nr05' ? TIPOS.nr05.foco : tipo==='nr06' ? TIPOS.nr06.foco : tipo==='acomp' ? TIPOS.acomp.foco : tipo==='pgr' ? TIPOS.pgr.foco : tipo==='psico' ? TIPOS.psico.foco : tipo==='inc' ? TIPOS.inc.foco : tipo==='ergo' ? TIPOS.ergo.foco : tipo==='nr12' ? TIPOS.nr12.foco : tipo==='nr35' ? TIPOS.nr35.foco : tipo==='nr10' ? TIPOS.nr10.foco : tipo==='nr24' ? TIPOS.nr24.foco : tipo==='treino' ? TIPOS.treino.foco : curMonth().foco,
       mes: curMonth().mes, checkIn:null,checkOut:null,
       answers:{},notes:{},photoCount:0,signed:false, checklist:chk};
-    DB.visits.push(v); await saveVisits();
   }
   await loadMedia(v.id);
   go('client',{clientId:cid,visit:v,vtab:'ident',panel:null});
@@ -2149,7 +2189,7 @@ function tabIdent(w,c,v){
   if(!v.checkIn){
     const b=el('button','btn amber','📍 Check-in — cheguei');
     b.onclick=async()=>{ b.disabled=true; b.textContent='Capturando local…';
-      const g=await getGeo(); v.checkIn={ts:new Date().toISOString(),geo:g}; await saveVisits(); go('client',{vtab:'checklist'}); };
+      const g=await getGeo(); v.checkIn={ts:new Date().toISOString(),geo:g}; if(DB.visits.indexOf(v)<0) DB.visits.push(v); await saveVisits(); go('client',{vtab:'checklist'}); };
     w.appendChild(b);
   } else {
     w.appendChild(el('div','stamp in',`<div class="lbl">Check-in — chegada</div>
@@ -2157,6 +2197,13 @@ function tabIdent(w,c,v){
     const b=el('button','btn green','Ir para o checklist ›'); b.style.marginTop='10px';
     b.onclick=()=>go('client',{vtab:'checklist'}); w.appendChild(b);
   }
+  const canc=el('button','btn ghost sm cancelvisita','✕ Cancelar visita');
+  canc.onclick=()=>{
+    if(!confirm('Cancelar esta visita? O check-in e as respostas preenchidas serão descartados.')) return;
+    const i=DB.visits.indexOf(v); if(i>=0) DB.visits.splice(i,1);
+    saveVisits(); toast('Visita cancelada.'); go('dash');
+  };
+  w.appendChild(canc);
 }
 
 /* ---------- aba CHECKLIST (com painel do índice) ---------- */
